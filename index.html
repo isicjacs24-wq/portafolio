@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio Profesional</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#0f172a;
+    color:#f8fafc;
+    font-family:'Segoe UI', sans-serif;
+}
+
+/* NAV */
+.navbar{
+    background:#0f172a !important;
+}
+
+/* HERO */
+.hero{
+    background: linear-gradient(-45deg,#1e3a8a,#3b82f6,#1e293b,#0f172a);
+    background-size:400% 400%;
+    animation: gradientMove 10s ease infinite;
+    padding:100px 0;
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* ANIMACION ENTRADA */
+.fade-up{
+    animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* BOTON */
+.btn-custom{
+    background:#3b82f6;
+    color:white;
+    border:none;
+    padding:12px 28px;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.btn-custom:hover{
+    box-shadow:0 0 20px #3b82f6;
+    transform:scale(1.05);
+}
+
+/* CARDS */
+.card{
+    background:#1e293b;
+    color:white;
+    border:none;
+    border-radius:15px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 25px rgba(59,130,246,0.4);
+}
+
+/* FOTO */
+img.rounded-circle{
+    transition:.4s;
+}
+
+img.rounded-circle:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px rgba(59,130,246,0.6);
+}
+
+section{
+    padding:70px 0;
+}
+
+footer{
+    background:#0b1120;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+<div class="container">
+<a class="navbar-brand fw-bold" href="#">Jacs Systems</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+<li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+<li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
+<li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero text-center">
+<div class="container fade-up">
+<h1 class="fw-bold display-5">Desarrollo Web Profesional</h1>
+<p class="lead mt-3">
+Creo páginas y sistemas modernos para ayudar a negocios a crecer.
+</p>
+<a href="#contacto" class="btn btn-custom mt-3">Trabajemos juntos</a>
+</div>
+</section>
+
+<!-- SOBRE MI -->
+<section id="sobre-mi">
+<div class="container">
+<div class="row align-items-center g-5">
+
+<div class="col-md-5 text-center fade-up">
+<img src="/logo.png"
+class="img-fluid rounded-circle shadow-lg"
+style="max-width:300px;border:4px solid #3b82f6;">
+</div>
+
+<div class="col-md-7 fade-up">
+<h2 class="fw-bold mb-3">Sobre mí</h2>
+
+<p class="lead">
+Soy estudiante de Ingeniería en Sistemas y desarrollador web.
+Me especializo en crear páginas modernas y sistemas web
+funcionales con diseño profesional.
+</p>
+
+<ul class="list-unstyled mt-4">
+<li>💻 Desarrollo Frontend y Backend</li>
+<li>🎨 Diseño UI moderno</li>
+<li>⚡ Sistemas web personalizados</li>
+<li>📱 Diseño adaptable a móviles</li>
+</ul>
+
+<a href="#contacto" class="btn btn-custom mt-3">
+Trabajemos juntos
+</a>
+
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+<div class="container">
+<h2 class="text-center mb-5 fade-up">Servicios</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4 fade-up">
+<div class="card p-4 text-center h-100">
+<h5>Páginas Web</h5>
+<p>Diseño moderno adaptable a cualquier dispositivo.</p>
+</div>
+</div>
+
+<div class="col-md-4 fade-up">
+<div class="card p-4 text-center h-100">
+<h5>Sistemas Web</h5>
+<p>Automatización y control de procesos para negocios.</p>
+</div>
+</div>
+
+<div class="col-md-4 fade-up">
+<div class="card p-4 text-center h-100">
+<h5>Diseño UI</h5>
+<p>Interfaces limpias, modernas y fáciles de usar.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+<div class="container">
+
+<h2 class="text-center mb-5 fade-up">Proyectos Realizados</h2>
+
+<div class="row g-4">
+
+<!-- PROYECTO 1 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>💻 Sistema web para ganadera local (Linares)</h5>
+<p>
+Desarrollo de sistema web para administración y control interno,
+optimización de procesos y gestión de información.
+</p>
+</div>
+</div>
+
+<!-- PROYECTO 2 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>⚽ Sistema web para liga de fútbol local</h5>
+<p>
+Sistema para gestión de equipos, partidos, resultados y organización
+general de la liga deportiva.
+</p>
+</div>
+</div>
+
+<!-- PROYECTO 3 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>🐾 Página web informativa para veterinaria</h5>
+<p>
+Sitio web responsive para mostrar servicios, ubicación,
+información y contacto rápido.
+</p>
+</div>
+</div>
+
+<!-- PROYECTO 4 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>🥟 Página web para tienda local de empanadas</h5>
+<p>
+Página informativa optimizada para mostrar productos,
+horarios y facilitar el contacto con clientes.
+</p>
+</div>
+</div>
+
+<!-- PROYECTO 5 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>🏫 Sistema web de control de asistencias escolares</h5>
+<p>
+Sistema para registro y monitoreo de asistencias,
+facilitando la administración escolar.
+</p>
+</div>
+</div>
+
+<!-- PROYECTO 6 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>📱 Aplicación Android en Flutter (Sistema de tandas)</h5>
+<p>
+Aplicación móvil para gestión de tandas, control de participantes
+y seguimiento de pagos.
+</p>
+</div>
+</div>
+
+<!-- PROYECTO 7 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>🌐 Desarrollo de sitios web Responsive</h5>
+<p>
+Implementación de diseño adaptable para visualización correcta
+en móviles, tablets y escritorio.
+</p>
+</div>
+</div>
+
+<!-- PROYECTO 8 -->
+<div class="col-md-6 fade-up">
+<div class="card p-4 h-100">
+<h5>🤖 Aplicación móvil avanzada</h5>
+<p>
+App con lectura de texto, modelado 3D, integración API Gemini como
+chatbot e implementación de cambio dinámico de colores en interfaz.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="text-center">
+<div class="container fade-up">
+<h2>Contacto</h2>
+<p>¿Quieres una página profesional para tu negocio?</p>
+<a href="https://wa.me/528211171741" class="btn btn-custom">
+WhatsApp
+</a>
+</div>
+</section>
+
+<footer class="text-center py-3">
+© 2026 - Jacs Systems | Desarrollo Web
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
