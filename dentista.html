@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Clínica Dental Sonrisa Perfecta</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+
+:root{
+  --primary:#0d6efd;
+  --accent:#00c2ff;
+  --dark:#0a2540;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,sans-serif;
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(rgba(10,37,64,.75),rgba(10,37,64,.75)),
+  url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5');
+  background-size:cover;
+  background-position:center;
+  height:100vh;
+  color:white;
+}
+
+/* BOTONES */
+.btn-primary{
+  background:var(--accent);
+  border:none;
+}
+
+.btn-primary:hover{
+  background:#00a4d8;
+}
+
+/* TARJETAS */
+.card{
+  transition:.3s ease;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+/* PRECIOS */
+.pricing-card{
+  border:none;
+  border-radius:15px;
+  transition:.3s;
+}
+
+.pricing-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+/* GALERIA */
+.gallery img{
+  height:220px;
+  object-fit:cover;
+}
+
+/* WHATSAPP */
+.whatsapp-float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:25px;
+  right:25px;
+  background:#25d366;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  text-decoration:none;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
+  z-index:999;
+  transition:.3s;
+}
+
+.whatsapp-float:hover{
+  transform:scale(1.1);
+  color:white;
+}
+
+/* SERVICIOS MISMO TAMAÑO */
+.service-card{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
+<div class="container">
+<a class="navbar-brand fw-bold text-primary">Sonrisa Perfecta</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+<li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+<li class="nav-item"><a class="nav-link" href="#doctores">Médicos</a></li>
+<li class="nav-item"><a class="nav-link" href="#precios">Precios</a></li>
+<li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero d-flex align-items-center text-center">
+<div class="container" data-aos="fade-up">
+<h1 class="display-4 fw-bold">Tu sonrisa en manos expertas</h1>
+<p class="lead">Especialistas en salud y estética dental</p>
+<a class="btn btn-primary btn-lg mt-3">Agendar cita</a>
+</div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="py-5">
+<div class="container">
+<h2 class="text-center mb-5" data-aos="fade-up">Servicios Dentales</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4 d-flex" data-aos="fade-up">
+<div class="card service-card shadow border-0 w-100">
+<h5>Limpieza Dental</h5>
+<p>Elimina sarro y protege tu sonrisa.</p>
+</div>
+</div>
+
+<div class="col-md-4 d-flex" data-aos="fade-up">
+<div class="card service-card shadow border-0 w-100">
+<h5>Ortodoncia</h5>
+<p>Brackets y alineadores modernos.</p>
+</div>
+</div>
+
+<div class="col-md-4 d-flex" data-aos="fade-up">
+<div class="card service-card shadow border-0 w-100">
+<h5>Blanqueamiento</h5>
+<p>Sonrisa más brillante y estética.</p>
+</div>
+</div>
+
+<div class="col-md-4 d-flex" data-aos="fade-up">
+<div class="card service-card shadow border-0 w-100">
+<h5>Implantes</h5>
+<p>Recupera piezas dentales perdidas.</p>
+</div>
+</div>
+
+<div class="col-md-4 d-flex" data-aos="fade-up">
+<div class="card service-card shadow border-0 w-100">
+<h5>Endodoncia</h5>
+<p>Tratamientos seguros y sin dolor.</p>
+</div>
+</div>
+
+<div class="col-md-4 d-flex" data-aos="fade-up">
+<div class="card service-card shadow border-0 w-100">
+<h5>Odontopediatría</h5>
+<p>Cuidado dental especializado para niños.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- POR QUE ELEGIRNOS -->
+<section class="py-5 bg-light">
+<div class="container">
+<h2 class="text-center mb-5" data-aos="fade-up">¿Por qué elegir nuestra clínica?</h2>
+
+<div class="row text-center g-4">
+
+<div class="col-md-3" data-aos="fade-up">
+<h3 class="text-primary">+10</h3>
+<p>Años de experiencia</p>
+</div>
+
+<div class="col-md-3" data-aos="fade-up">
+<h3 class="text-primary">+1000</h3>
+<p>Pacientes satisfechos</p>
+</div>
+
+<div class="col-md-3" data-aos="fade-up">
+<h3 class="text-primary">Equipo</h3>
+<p>Tecnología moderna</p>
+</div>
+
+<div class="col-md-3" data-aos="fade-up">
+<h3 class="text-primary">100%</h3>
+<p>Atención personalizada</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- MEDICOS -->
+<section id="doctores" class="py-5 bg-light">
+<div class="container">
+<h2 class="text-center mb-5" data-aos="fade-up">Nuestro Equipo Médico</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="card shadow border-0 h-100">
+<img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2" class="card-img-top" style="height:300px;object-fit:cover;">
+<div class="card-body text-center">
+<h5>Dra. Juana Pérez</h5>
+<p class="text-muted">Ortodoncia</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="card shadow border-0 h-100">
+<img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d" class="card-img-top" style="height:300px;object-fit:cover;">
+<div class="card-body text-center">
+<h5>Dr. José Sanchez</h5>
+<p class="text-muted">Implantes</p>
+</div>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="card shadow border-0 h-100">
+<img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f" class="card-img-top" style="height:300px;object-fit:cover;">
+<div class="card-body text-center">
+<h5>Dra. Karla Ruiz</h5>
+<p class="text-muted">Odontología General</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- PRECIOS -->
+<section id="precios" class="py-5">
+<div class="container">
+<h2 class="text-center mb-5" data-aos="fade-up">Planes Dentales</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="card pricing-card shadow text-center p-4">
+<h4>Básico</h4>
+<h2 class="text-primary">$499</h2>
+<p>Limpieza dental</p>
+<p>Revisión general</p>
+<a class="btn btn-primary mt-3">Agendar</a>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="card pricing-card shadow text-center p-4 border border-primary">
+<h4>Premium ⭐</h4>
+<h2 class="text-primary">$999</h2>
+<p>Limpieza profunda</p>
+<p>Blanqueamiento</p>
+<a class="btn btn-primary mt-3">Elegir plan</a>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="card pricing-card shadow text-center p-4">
+<h4>Familiar</h4>
+<h2 class="text-primary">$1499</h2>
+<p>Hasta 4 personas</p>
+<p>Revisión completa</p>
+<a class="btn btn-primary mt-3">Agendar</a>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="py-5 bg-light">
+<div class="container">
+<h2 class="text-center mb-5" data-aos="fade-up">Contáctanos</h2>
+
+<div class="row g-4">
+
+<!-- FORMULARIO -->
+<div class="col-md-6" data-aos="fade-right">
+<div class="card shadow border-0 p-4 h-100">
+<form id="whatsappForm">
+<input type="text" class="form-control mb-3" id="nombre" placeholder="Nombre completo" required>
+<input type="tel" class="form-control mb-3" id="telefono" placeholder="Teléfono" required>
+<input type="email" class="form-control mb-3" id="email" placeholder="Correo electrónico" required>
+<textarea class="form-control mb-3" id="mensaje" rows="4" placeholder="Escribe tu mensaje" required></textarea>
+<button type="submit" class="btn btn-primary w-100">Enviar mensaje por WhatsApp</button>
+</form>
+</div>
+</div>
+
+<!-- INFORMACION -->
+<div class="col-md-6" data-aos="fade-left">
+<div class="card shadow border-0 p-4 h-100">
+<h5 class="mb-3">Información de contacto</h5>
+
+<p class="mb-2">📍 Linares, Nuevo León</p>
+<p class="mb-2">📞 +52 81 1234 5678</p>
+<p class="mb-2">✉ contacto@sonrisaperfecta.com</p>
+
+<hr>
+
+<h6>Horarios</h6>
+<p class="mb-1">Lunes - Viernes: 9:00 AM - 7:00 PM</p>
+<p class="mb-1">Sábado: 9:00 AM - 2:00 PM</p>
+<p class="mb-0">Domingo: Cerrado</p>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contacto" class="bg-dark text-white text-center py-4">
+<p>© 2026 Clínica Dental Sonrisa Perfecta</p>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/528211171741" class="whatsapp-float" target="_blank">💬</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration:800,
+  once:true,
+  offset:80
+});
+
+window.addEventListener("scroll", function(){
+  const nav = document.querySelector(".navbar");
+  nav.classList.toggle("shadow-lg", window.scrollY > 50);
+});
+
+// Formulario WhatsApp - CONFIGURA TU NÚMERO AQUÍ
+document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Obtener valores del formulario
+    const nombre = document.getElementById('nombre').value;
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('email').value;
+    const mensaje = document.getElementById('mensaje').value;
+    
+    // 🔴 IMPORTANTE: REEMPLAZA ESTE NÚMERO CON TU CELULAR
+    // Formato: código de país + número (sin espacios ni signos)
+    // Ejemplo México: 5218112345678 (52 es México, 1 es para WhatsApp, 81 es Linares)
+    const numeroWhatsApp = '5218112345678'; // ← CAMBIA ESTE NÚMERO
+    
+    // Construir mensaje
+    const textoMensaje = `Hola, soy *${nombre}*.%0A%0A` +
+                        `*Teléfono:* ${telefono}%0A` +
+                        `*Email:* ${email}%0A%0A` +
+                        `*Mensaje:*%0A${mensaje}`;
+    
+    // Crear URL de WhatsApp
+    const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${textoMensaje}`;
+    
+    // Abrir WhatsApp en nueva pestaña
+    window.open(urlWhatsApp, '_blank');
+    
+    // Mensaje de confirmación
+    alert('¡Redirigiendo a WhatsApp para enviar tu mensaje!');
+});
+</script>
+
+</body>
+</html>
