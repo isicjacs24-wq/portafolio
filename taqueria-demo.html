@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taquería El Sabor | Profesional + Ubicación</title>
+  <!-- Bootstrap 5 + icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --taqueria-red: #c0392b;
+      --taqueria-dark: #2c3e50;
+      --taqueria-accent: #e67e22;
+    }
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #fefefe;
+      scroll-behavior: smooth;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 100%), 
+                  url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat fixed;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      color: white;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .hero .display-3 {
+      font-weight: 800;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      color: var(--taqueria-dark);
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 4px;
+      background: var(--taqueria-accent);
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+    .card-product {
+      border: none;
+      border-radius: 24px;
+      background: white;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .card-product:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 45px -10px rgba(0,0,0,0.3);
+    }
+    .card-product img {
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--taqueria-accent);
+    }
+    .card-product .card-body {
+      padding: 1.5rem 1rem;
+    }
+    .price-tag {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--taqueria-red);
+      display: block;
+    }
+    .btn-detalle {
+      background: var(--taqueria-accent);
+      border: none;
+      border-radius: 40px;
+      padding: 0.5rem 1.8rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .btn-detalle:hover {
+      background: #d35400;
+      transform: scale(1.05);
+    }
+    .carrito-lateral {
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      padding: 1.8rem 1.5rem;
+      position: sticky;
+      top: 100px;
+    }
+    .list-group-item-custom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 4px solid var(--taqueria-accent);
+      margin-bottom: 8px;
+      border-radius: 14px !important;
+      background: #fcfcfc;
+      font-size: 0.95rem;
+    }
+    .badge-extra {
+      background: #27ae60;
+      color: white;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 30px;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      color: white;
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 36px;
+      line-height: 68px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      z-index: 99;
+      transition: 0.2s;
+      border: 2px solid white;
+    }
+    .whatsapp-float:hover {
+      background: #20b859;
+      transform: scale(1.1);
+      color: white;
+    }
+    footer {
+      background: var(--taqueria-dark);
+      color: #ecf0f1;
+      border-top: 5px solid var(--taqueria-accent);
+    }
+    .footer-link {
+      color: #f1c40f;
+      text-decoration: none;
+    }
+    .opciones-extras label {
+      cursor: pointer;
+      background: #f8f9fa;
+      padding: 6px 18px;
+      border-radius: 40px;
+      border: 1px solid #dee2e6;
+      transition: 0.15s;
+      margin-right: 8px;
+      font-size: 0.9rem;
+    }
+    .opciones-extras input:checked + label {
+      background: var(--taqueria-accent);
+      color: white;
+      border-color: var(--taqueria-accent);
+    }
+    /* Sección de ubicación mejorada */
+    .ubicacion-card {
+      background: #f0f9ff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border-left: 5px solid #25D366;
+      margin-top: 1.5rem;
+    }
+    .btn-ubicacion {
+      background: #34b7f1;
+      color: white;
+      border-radius: 40px;
+      padding: 0.6rem 1.5rem;
+      font-weight: 600;
+      border: none;
+      transition: 0.2s;
+    }
+    .btn-ubicacion:hover {
+      background: #1e8bc3;
+      transform: translateY(-2px);
+    }
+    .texto-ubicacion {
+      background: white;
+      border-radius: 16px;
+      padding: 0.8rem;
+      border: 1px solid #ced4da;
+    }
+    /* responsive */
+    @media (max-width: 768px) {
+      .hero { min-height: 50vh; }
+      .carrito-lateral { margin-top: 2rem; position: relative; top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- barra de navegación moderna -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="bi bi-shop"></i> Taquería El Sabor <span class="text-warning">🌮🔥</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#menu">Menú</a></li>
+        <li class="nav-item"><a class="nav-link" href="#especialidades">Especialidades</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO con parallax effect (simulado) -->
+<section class="hero" id="inicio">
+  <div class="container text-center">
+    <span class="badge bg-warning text-dark px-4 py-2 mb-3 fs-6">🔥 100% ESTILO MEXICANO</span>
+    <h1 class="display-3 fw-bold mb-3">Taquería El Sabor</h1>
+    <p class="lead fs-3 mb-4">Los mejores tacos al pastor, bistec y gringas de la colonia</p>
+    <a href="#menu" class="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold shadow">VER MENÚ <i class="bi bi-arrow-down"></i></a>
+  </div>
+</section>
+
+<!-- SECCIÓN MENÚ + CARRITO LATERAL (AJAX simulado) -->
+<section class="py-5" id="menu">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Columna izquierda: productos -->
+      <div class="col-lg-8">
+        <h2 class="section-title text-center">🔥 Nuestros Tacos</h2>
+        <p class="text-center text-muted mb-5">Cada taco con su toque especial. Elige y personaliza.</p>
+        
+        <div class="row g-4" id="productos-container">
+          <!-- Los productos se cargarán via AJAX (simulado con fetch local) -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-warning" role="status"></div>
+            <p>Cargando delicioso menú...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: carrito profesional con ubicación -->
+      <div class="col-lg-4">
+        <div class="carrito-lateral">
+          <h4 class="fw-bold mb-4"><i class="bi bi-basket2-fill text-warning"></i> Tu pedido</h4>
+          <div id="carrito-contenedor">
+            <ul id="carrito-lista" class="list-group mb-3" style="max-height: 280px; overflow-y: auto;">
+              <!-- vacío -->
+            </ul>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span class="fw-bold">Subtotal:</span>
+            <span class="fw-bold">$<span id="total-carrito">0</span></span>
+          </div>
+          <hr>
+          
+          <!-- Datos del cliente mejorados con ubicación -->
+          <label class="form-label fw-semibold">Nombre del cliente</label>
+          <input type="text" id="cliente-nombre" class="form-control rounded-pill mb-3" placeholder="Ej. Juan Pérez" value="Cliente">
+          
+          <!-- SECCIÓN UBICACIÓN - NUEVA -->
+          <div class="ubicacion-card mb-4">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-geo-alt-fill text-danger fs-3 me-2"></i>
+              <h5 class="fw-bold mb-0">¿Dónde entregamos?</h5>
+            </div>
+            <p class="small text-muted mb-2">Comparte tu ubicación para delivery rápido</p>
+            
+            <div class="mb-2">
+              <textarea id="direccionManual" class="form-control rounded-4" rows="2" placeholder="Escribe tu dirección (calle, número, colonia, referencia)"></textarea>
+            </div>
+            
+            <div class="d-flex gap-2 mt-2">
+              <button class="btn btn-ubicacion flex-fill" onclick="obtenerUbicacionAutomatica()">
+                <i class="bi bi-crosshair"></i> Usar mi ubicación
+              </button>
+            </div>
+            
+            <div id="ubicacionInfo" class="texto-ubicacion mt-3 small d-none">
+              <i class="bi bi-check-circle-fill text-success"></i> <span id="ubicacionTexto">Cargando...</span>
+            </div>
+          </div>
+          
+          <!-- Botones de acción -->
+          <div class="d-grid gap-2">
+            <button class="btn btn-success rounded-pill py-2" onclick="enviarPedidoWhatsApp()">
+              <i class="bi bi-whatsapp"></i> Enviar a WhatsApp
+            </button>
+            <button class="btn btn-outline-dark rounded-pill py-2" onclick="generarPDF()">
+              <i class="bi bi-printer"></i> Descargar ticket
+            </button>
+            <button class="btn btn-link text-danger" onclick="vaciarCarrito()">Vaciar carrito</button>
+          </div>
+          
+          <!-- Mensaje informativo -->
+          <div class="alert alert-warning mt-3 py-2 small" role="alert">
+            <i class="bi bi-truck"></i> Los datos de ubicación se incluirán automáticamente en el WhatsApp.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN ESPECIALIDADES / PROMOS -->
+<section class="py-5 bg-light" id="especialidades">
+  <div class="container">
+    <h2 class="section-title text-center">✨ Especialidades de la casa</h2>
+    <div class="row g-4 mt-3">
+      <div class="col-md-4">
+        <div class="card border-0 shadow h-100 text-center p-4">
+          <i class="fas fa-seedling fa-3x text-success mb-3"></i>
+          <h5>Taco Veggie</h5>
+          <p>Con nopales asados, queso panela y salsa verde. <span class="badge bg-success">$35</span></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow h-100 text-center p-4">
+          <i class="fas fa-fire fa-3x text-danger mb-3"></i>
+          <h3>🔥</h3>
+          <h5>Volcán de Pastor</h5>
+          <p>Tortilla dorada, pastor, queso fundido y piña. <span class="badge bg-danger">$55</span></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow h-100 text-center p-4">
+          <i class="fas fa-mug-hot fa-3x text-warning mb-3"></i>
+          <h5>Consomé de borrego</h5>
+          <p>Para combatir el frío. <span class="badge bg-warning">$40</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN CONTACTO / MAPA SIMULADO -->
+<section class="py-5" id="contacto">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h3>📍 Visítanos</h3>
+        <p class="lead">Av. México 123, Colonia Centro</p>
+        <p><i class="bi bi-clock"></i> Lun-Dom 6pm - 2am</p>
+        <p><i class="bi bi-telephone"></i> <strong>+52 821 117 1741</strong> (pide a domicilio)</p>
+        <p><i class="bi bi-truck"></i> Delivery propio y Uber Eats</p>
+      </div>
+      <div class="col-md-6">
+        <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f" class="img-fluid rounded-4 shadow" alt="Local" style="max-height: 240px; width:100%; object-fit:cover;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-4">
+  <div class="container text-center">
+    <p class="mb-0">Taquería El Sabor © 2026 — Tradición mexicana <i class="bi bi-heart-fill text-danger"></i></p>
+    <small>Número actualizado: <a href="https://wa.me/528211171741" class="footer-link">+52 821 117 1741</a></small>
+  </div>
+</footer>
+
+<!-- Botón flotante WhatsApp actualizado -->
+<a href="https://wa.me/528211171741" class="whatsapp-float" target="_blank">
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+<!-- Modal para personalizar detalles del producto (con queso, etc) -->
+<div class="modal fade" id="modalDetalles" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Personaliza tu <span id="modal-producto-nombre"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modal-producto-precio">
+        <div class="mb-3">
+          <label class="form-label fw-bold">Extras / detalles:</label>
+          <div class="opciones-extras d-flex flex-wrap gap-2">
+            <input type="checkbox" class="btn-check" id="extraQueso" autocomplete="off">
+            <label class="btn btn-outline-warning" for="extraQueso">🧀 Con queso (+$8)</label>
+
+            <input type="checkbox" class="btn-check" id="extraCilantro" autocomplete="off">
+            <label class="btn btn-outline-success" for="extraCilantro">🌿 Sin cilantro</label>
+
+            <input type="checkbox" class="btn-check" id="extraSalsa" autocomplete="off">
+            <label class="btn btn-outline-danger" for="extraSalsa">🌶️ Salsa extra (+$5)</label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Nota adicional (opcional)</label>
+          <textarea id="notaAdicional" class="form-control" rows="2" placeholder="ej. bien dorado, mucho queso..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-warning" id="confirmarAgregar">Agregar al pedido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  (function() {
+    // --- Estado global y carrito (con detalles) ---
+    let carrito = [];  // cada item: { nombre, precioBase, extras[], nota, precioFinal }
+    let ubicacionCompartida = ''; // almacena dirección obtenida
+
+    // --- productos precargados (simulamos AJAX con fetch de datos embebidos) ---
+    const menuEjemplo = [
+      { id:1, nombre:"Taco al Pastor", precio:15, img:"https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c" },
+      { id:2, nombre:"Taco de Bistec", precio:18, img:"https://images.unsplash.com/photo-1552332386-f8dd00dc2f85" },
+      { id:3, nombre:"Gringa (pastor)", precio:45, img:"https://images.unsplash.com/photo-1599974579688-8dbdd335c77f" },
+      { id:4, nombre:"Taco Campechano", precio:22, img:"https://images.unsplash.com/photo-1512850183-6d7990f42385" },
+      { id:5, nombre:"Taco de Suadero", precio:22, img:"https://images.unsplash.com/photo-1624726175513-19b9baf9fbd1" },
+      { id:6, nombre:"Quesadilla frita", precio:35, img:"https://images.unsplash.com/photo-1626700051175-6818013e1d4f" }
+    ];
+
+    // --- simulación de AJAX: cargar menú con fetch pero usando datos locales (simula petición) ---
+    function cargarMenu() {
+      const container = document.getElementById('productos-container');
+      container.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-warning"></div><p>Cargando delicioso menú...</p></div>';
+
+      // simular retardo de red (como si fuera AJAX)
+      setTimeout(() => {
+        let html = '';
+        menuEjemplo.forEach(prod => {
+          html += `
+            <div class="col-md-6 col-lg-4">
+              <div class="card-product">
+                <img src="${prod.img}" class="card-img-top" alt="${prod.nombre}">
+                <div class="card-body text-center">
+                  <h5 class="fw-bold">${prod.nombre}</h5>
+                  <span class="price-tag">$${prod.precio}</span>
+                  <button class="btn btn-detalle text-white mt-2 w-100" 
+                    onclick="abrirModalDetalles('${prod.nombre}', ${prod.precio})">
+                    <i class="bi bi-plus-circle"></i> Agregar
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+      }, 600); // simula carga AJAX
+    }
+
+    // --- modal y lógica de personalización ---
+    window.abrirModalDetalles = function(nombre, precio) {
+      document.getElementById('modal-producto-nombre').innerText = nombre;
+      document.getElementById('modal-producto-precio').value = precio;
+      // resetear checks y texto
+      document.getElementById('extraQueso').checked = false;
+      document.getElementById('extraCilantro').checked = false;
+      document.getElementById('extraSalsa').checked = false;
+      document.getElementById('notaAdicional').value = '';
+      // mostrar modal
+      new bootstrap.Modal(document.getElementById('modalDetalles')).show();
+    };
+
+    document.getElementById('confirmarAgregar').addEventListener('click', function() {
+      const nombre = document.getElementById('modal-producto-nombre').innerText;
+      const precioBase = parseFloat(document.getElementById('modal-producto-precio').value);
+      let extras = [];
+      let extraPrecio = 0;
+
+      if (document.getElementById('extraQueso').checked) {
+        extras.push('con queso');
+        extraPrecio += 8;
+      }
+      if (document.getElementById('extraCilantro').checked) {
+        extras.push('sin cilantro');
+      }
+      if (document.getElementById('extraSalsa').checked) {
+        extras.push('salsa extra');
+        extraPrecio += 5;
+      }
+      const nota = document.getElementById('notaAdicional').value.trim();
+      if (nota) extras.push(`nota: ${nota}`);
+
+      const precioFinal = precioBase + extraPrecio;
+      let nombreConExtras = nombre;
+      if (extras.length > 0) nombreConExtras += ` (${extras.join(', ')})`;
+
+      // agregar al carrito
+      carrito.push({
+        nombre: nombreConExtras,
+        precioFinal: precioFinal
+      });
+
+      actualizarCarritoUI();
+      // cerrar modal
+      bootstrap.Modal.getInstance(document.getElementById('modalDetalles')).hide();
+    });
+
+    function actualizarCarritoUI() {
+      const lista = document.getElementById('carrito-lista');
+      const totalSpan = document.getElementById('total-carrito');
+      lista.innerHTML = '';
+      let total = 0;
+      carrito.forEach((item, index) => {
+        total += item.precioFinal;
+        const li = document.createElement('li');
+        li.className = 'list-group-item list-group-item-custom';
+        li.innerHTML = `
+          <span>${item.nombre}</span>
+          <span class="fw-bold">$${item.precioFinal} <i class="bi bi-x-circle-fill text-danger" style="cursor:pointer;" onclick="eliminarItem(${index})"></i></span>
+        `;
+        lista.appendChild(li);
+      });
+      totalSpan.innerText = total;
+    }
+
+    window.eliminarItem = function(index) {
+      carrito.splice(index, 1);
+      actualizarCarritoUI();
+    };
+
+    window.vaciarCarrito = function() {
+      carrito = [];
+      ubicacionCompartida = ''; // opcional limpiar ubicación
+      document.getElementById('direccionManual').value = '';
+      document.getElementById('ubicacionInfo').classList.add('d-none');
+      actualizarCarritoUI();
+    };
+
+    // --- FUNCIÓN DE UBICACIÓN AUTOMÁTICA (geolocalización) ---
+    window.obtenerUbicacionAutomatica = function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            // Usamos una API inversa de geocoding (simulada con fetch a Nominatim/OpenStreetMap)
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1`)
+              .then(response => response.json())
+              .then(data => {
+                let direccion = data.display_name || '';
+                // Acortamos un poco la dirección para que no sea enorme
+                if (direccion.length > 150) direccion = direccion.substring(0,150)+'...';
+                
+                ubicacionCompartida = direccion;
+                document.getElementById('direccionManual').value = direccion;
+                document.getElementById('ubicacionTexto').innerText = direccion;
+                document.getElementById('ubicacionInfo').classList.remove('d-none');
+                
+                // También guardamos en un campo oculto para el PDF (ya se usa direccionManual)
+              })
+              .catch(error => {
+                // Fallback: mostrar coordenadas
+                ubicacionCompartida = `Coordenadas: ${lat}, ${lng} (usar mapa para referencia)`;
+                document.getElementById('direccionManual').value = ubicacionCompartida;
+                document.getElementById('ubicacionTexto').innerText = ubicacionCompartida;
+                document.getElementById('ubicacionInfo').classList.remove('d-none');
+              });
+          },
+          function(error) {
+            alert('No se pudo obtener tu ubicación. Escribe la dirección manualmente.');
+          }
+        );
+      } else {
+        alert('Geolocalización no soportada por tu navegador. Escribe la dirección manualmente.');
+      }
+    };
+
+    // --- Enviar pedido por WhatsApp con detalles y número correcto + ubicación ---
+    window.enviarPedidoWhatsApp = function() {
+      if (carrito.length === 0) {
+        alert('Agrega productos al carrito');
+        return;
+      }
+      let cliente = document.getElementById('cliente-nombre').value.trim() || 'Cliente';
+      
+      // Obtener dirección (prioridad: manual o automática)
+      let direccion = document.getElementById('direccionManual').value.trim();
+      if (!direccion && ubicacionCompartida) direccion = ubicacionCompartida;
+      
+      let mensaje = `🍽️ *PEDIDO PARA LLEVAR*%0A`;
+      mensaje += `👤 Cliente: ${cliente}%0A`;
+      
+      if (direccion) {
+        mensaje += `📍 *Dirección de entrega:* ${direccion}%0A`;
+      } else {
+        mensaje += `📍 *Dirección:* No especificada (preguntar al cliente)%0A`;
+      }
+      
+      mensaje += `%0A*PRODUCTOS:*%0A`;
+      carrito.forEach(item => {
+        mensaje += `• ${item.nombre} - $${item.precioFinal}%0A`;
+      });
+      let total = carrito.reduce((acc, it) => acc + it.precioFinal, 0);
+      mensaje += `%0A*TOTAL: $${total}*%0A`;
+      mensaje += `%0A🙏 ¡Gracias por preferir Taquería El Sabor! 🌮🔥`;
+
+      let numero = '528211171741'; // NUEVO NÚMERO
+      let url = `https://wa.me/${numero}?text=${mensaje}`;
+      window.open(url, '_blank');
+    };
+
+    // --- Generar PDF con detalles y ubicación ---
+    window.generarPDF = function() {
+      if (carrito.length === 0) {
+        alert('No hay productos en el carrito');
+        return;
+      }
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      let cliente = document.getElementById('cliente-nombre').value.trim() || 'Cliente';
+      
+      // Obtener dirección
+      let direccion = document.getElementById('direccionManual').value.trim() || ubicacionCompartida || 'No especificada';
+      
+      doc.setFontSize(18);
+      doc.text('Taquería El Sabor', 20, 20);
+      doc.setFontSize(12);
+      doc.text(`Cliente: ${cliente}`, 20, 30);
+      doc.text(`Fecha: ${new Date().toLocaleString()}`, 20, 38);
+      doc.text(`Dirección: ${direccion}`, 20, 46);
+      
+      let y = 60;
+      carrito.forEach(item => {
+        doc.text(`• ${item.nombre}: $${item.precioFinal}`, 20, y);
+        y += 8;
+      });
+      
+      let total = carrito.reduce((acc, it) => acc + it.precioFinal, 0);
+      doc.setFontSize(14);
+      doc.text(`Total: $${total}`, 20, y + 10);
+      
+      doc.save('ticket_taqueria_con_ubicacion.pdf');
+    };
+
+    // Inicializar carga del menú y carrito vacío
+    window.onload = function() {
+      cargarMenu();
+      actualizarCarritoUI();
+      
+      // Detectar si hay dirección manual escrita
+      document.getElementById('direccionManual').addEventListener('input', function(e) {
+        if (e.target.value.trim() !== '') {
+          ubicacionCompartida = e.target.value.trim();
+          document.getElementById('ubicacionTexto').innerText = ubicacionCompartida;
+          document.getElementById('ubicacionInfo').classList.remove('d-none');
+        } else {
+          document.getElementById('ubicacionInfo').classList.add('d-none');
+        }
+      });
+    };
+
+  })();
+</script>
+
+<!-- pequeño fix para botones de opciones -->
+</body>
+</html>
