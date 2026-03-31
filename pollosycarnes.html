@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Pollería El Buen Corte | Pollos y Carnes Premium - Envío a domicilio</title>
+
+<!-- Bootstrap 5 + Icons + Fonts -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- Google Fonts para tipografía profesional -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #fefaf5;
+  scroll-behavior: smooth;
+}
+
+/* Hero con gradiente animado y overlay mejorado */
+.hero {
+  background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.6) 100%),
+  url('https://images.unsplash.com/photo-1604908176997-431ef4f5f2a3?w=1600&auto=format');
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: fixed;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+  border-bottom: 5px solid #ff8c42;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 40%, rgba(255,140,66,0.2) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  animation: fadeSlideUp 0.9s ease-out;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.hero p {
+  font-size: 1.3rem;
+  font-weight: 400;
+  animation: fadeSlideUp 0.9s ease-out 0.15s both;
+  opacity: 0.95;
+}
+
+/* Animaciones profesionales */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-product {
+  border-radius: 28px;
+  background: white;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+}
+
+.card-product:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.2);
+  border-bottom: 3px solid #ff8c42;
+}
+
+.card-product .card-body {
+  padding: 1.5rem;
+}
+
+.card-product h5 {
+  font-weight: 700;
+  color: #2c2b28;
+  margin-bottom: 0.5rem;
+}
+
+.price-tag {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #e65c1e;
+  display: inline-block;
+  margin: 8px 0;
+}
+
+.btn-agregar {
+  background: #ff8c42;
+  border: none;
+  padding: 10px 18px;
+  font-weight: 600;
+  border-radius: 40px;
+  transition: all 0.2s ease;
+  color: white;
+  box-shadow: 0 4px 8px rgba(255,140,66,0.3);
+}
+
+.btn-agregar:hover {
+  background: #e5721e;
+  transform: scale(0.96);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* carrito lateral moderno */
+.cart-card {
+  border-radius: 32px;
+  border: none;
+  background: #ffffffea;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 20px;
+  transition: all 0.3s;
+}
+
+.cart-list {
+  max-height: 260px;
+  overflow-y: auto;
+  padding-left: 0;
+  list-style: none;
+}
+
+.cart-list li {
+  background: #fef3e8;
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  border-radius: 60px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  transition: transform 0.1s ease;
+  border-left: 4px solid #ff8c42;
+}
+
+.total-amount {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #2b2b2b;
+  background: #ffeedd;
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  border-radius: 50px;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: white;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(37, 211, 102, 0.4);
+  transition: all 0.25s ease;
+  z-index: 1050;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  background: #20b859;
+  color: white;
+}
+
+.btn-whatsapp-custom {
+  background: #25D366;
+  border: none;
+  padding: 12px;
+  font-weight: 700;
+  border-radius: 60px;
+  transition: 0.2s;
+}
+
+.btn-whatsapp-custom:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+}
+
+.btn-ticket {
+  background: #2c2b28;
+  border: none;
+  padding: 12px;
+  font-weight: 600;
+  border-radius: 60px;
+  transition: 0.2s;
+}
+
+.btn-ticket:hover {
+  background: #111;
+  transform: translateY(-2px);
+}
+
+.btn-location {
+  background: #4c6ef5;
+  border: none;
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 60px;
+  transition: 0.2s;
+  color: white;
+}
+
+.btn-location:hover {
+  background: #3b5bdb;
+  transform: translateY(-2px);
+}
+
+input#cliente, input#direccion {
+  border-radius: 60px;
+  padding: 12px 18px;
+  border: 1.5px solid #ffe0c4;
+  background: white;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #ff8c42;
+  box-shadow: 0 0 0 3px rgba(255,140,66,0.2);
+}
+
+.location-badge {
+  font-size: 0.75rem;
+  background: #e9ecef;
+  padding: 5px 12px;
+  border-radius: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .cart-card {
+    margin-top: 30px;
+    position: relative;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.05); background-color: #ffaa66; }
+  100% { transform: scale(1);}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark py-3 shadow-sm">
+  <div class="container">
+    <span class="navbar-brand fs-3 fw-bold">
+      <i class="bi bi-fire"></i> Pollería El Buen Corte
+    </span>
+    <span class="text-white-50 small">
+      <i class="bi bi-geo-alt-fill"></i> Envíos a domicilio
+    </span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1><i class="bi bi-gem"></i> Pollos y carne fresca</h1>
+    <p class="lead">Cortes premium, precios justos y entrega rápida por WhatsApp</p>
+    <div class="mt-4">
+      <span class="badge bg-warning text-dark fs-6 p-2"><i class="bi bi-whatsapp"></i> Pedidos por WhatsApp con ubicación</span>
+    </div>
+  </div>
+</section>
+
+<div class="container mt-5 mb-5">
+  <div class="row g-4">
+    <!-- LISTA DE PRODUCTOS -->
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold"><i class="bi bi-grid-3x3-gap-fill"></i> Nuestros cortes</h3>
+        <span class="badge bg-dark rounded-pill px-3 py-2">🔥 calidad garantizada</span>
+      </div>
+      <div class="row g-4" id="productos"></div>
+    </div>
+
+    <!-- CARRITO + UBICACIÓN -->
+    <div class="col-lg-4">
+      <div class="cart-card card p-4">
+        <h4 class="fw-bold d-flex align-items-center gap-2">
+          <i class="bi bi-basket3-fill text-warning"></i> Tu pedido
+          <span id="cartCountBadge" class="badge bg-danger rounded-pill ms-auto">0</span>
+        </h4>
+        <hr class="my-2">
+        <div style="max-height: 280px; overflow-y: auto;" class="mb-2">
+          <ul id="lista" class="cart-list">
+            <li class="text-muted text-center py-3">🛒 Aún no agregas productos</li>
+          </ul>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <span class="fw-semibold">Total</span>
+          <span class="total-amount">$<span id="total">0</span></span>
+        </div>
+        
+        <!-- Datos para envío: nombre + dirección + ubicación -->
+        <div class="mt-3">
+          <input type="text" id="cliente" class="form-control mb-2" placeholder="Tu nombre *" autocomplete="off">
+          <input type="text" id="direccion" class="form-control mb-2" placeholder="Dirección completa (calle, número, colonia) *" autocomplete="off">
+          
+          <!-- Botón para obtener ubicación en vivo -->
+          <button class="btn-location btn w-100 mb-2" id="getLocationBtn" onclick="obtenerUbicacion()">
+            <i class="bi bi-geo-alt-fill"></i> Usar mi ubicación actual
+          </button>
+          <div id="locationStatus" class="location-badge">
+            <i class="bi bi-info-circle"></i> Comparte tu ubicación para delivery
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-2">
+          <button class="btn btn-whatsapp-custom text-white" onclick="whatsappConUbicacion()">
+            <i class="bi bi-whatsapp"></i> Enviar pedido + ubicación
+          </button>
+          <button class="btn btn-ticket text-white" onclick="pdf()">
+            <i class="bi bi-receipt"></i> Descargar ticket PDF
+          </button>
+        </div>
+        <div class="mt-3 text-center small text-muted">
+          <i class="bi bi-shield-check"></i> Compartir ubicación ayuda al repartidor
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="#" class="whatsapp-float" id="floatWhatsappBtn">
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+<script>
+  // ======================== DATOS DE PRODUCTOS ========================
+  let productos = [
+    { nombre: "Pollo entero", precio: 120, icono: "bi-egg-fried", desc: "Fresco, 1.8kg aprox" },
+    { nombre: "Medio pollo", precio: 65, icono: "bi-cup-straw", desc: "Jugoso y sazonado" },
+    { nombre: "Pierna kg", precio: 85, icono: "bi-droplet", desc: "Pieza suculenta" },
+    { nombre: "Carne asar kg", precio: 180, icono: "bi-fire", desc: "Corte especial parrillera" },
+    { nombre: "Costilla kg", precio: 190, icono: "bi-grid-3x3-gap-fill", desc: "Ahumada, sabor único" },
+    { nombre: "Molida kg", precio: 140, icono: "bi-archive", desc: "Res 100% natural" }
+  ];
+
+  let carrito = []; // almacena objetos del producto
+  let ubicacionGuardada = null;   // objeto con lat, lng y dirección legible opcional
+
+  // ======================== FUNCIONES DEL CATÁLOGO ========================
+  function cargarProductos() {
+    let container = document.getElementById("productos");
+    if (!container) return;
+    let html = "";
+    productos.forEach((prod, idx) => {
+      html += `
+        <div class="col-md-6 col-sm-12 producto-item" style="animation: fadeSlideUp 0.5s ease-out ${idx * 0.05}s both;">
+          <div class="card-product card h-100">
+            <div class="card-body">
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <i class="bi ${prod.icono} fs-1 text-warning"></i>
+                <div>
+                  <h5 class="card-title fw-bold mb-0">${prod.nombre}</h5>
+                  <small class="text-muted">${prod.desc}</small>
+                </div>
+              </div>
+              <div class="mt-2 d-flex justify-content-between align-items-end">
+                <div class="price-tag">$${prod.precio}</div>
+                <button class="btn btn-agregar" onclick="agregarAlCarrito(${idx})">
+                  <i class="bi bi-cart-plus"></i> Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  function agregarAlCarrito(index) {
+    const productoSeleccionado = productos[index];
+    carrito.push({ ...productoSeleccionado });
+    actualizarInterfazCarrito();
+    const botones = document.querySelectorAll('.btn-agregar');
+    if (botones[index]) {
+      botones[index].style.transform = 'scale(0.92)';
+      setTimeout(() => { if(botones[index]) botones[index].style.transform = ''; }, 180);
+    }
+    const badge = document.getElementById('cartCountBadge');
+    if (badge) {
+      badge.classList.add('animate-pulse');
+      setTimeout(() => badge.classList.remove('animate-pulse'), 300);
+    }
+  }
+
+  function eliminarDelCarrito(index) {
+    if (index >= 0 && index < carrito.length) {
+      carrito.splice(index, 1);
+      actualizarInterfazCarrito();
+    }
+  }
+
+  function actualizarInterfazCarrito() {
+    const listaUl = document.getElementById("lista");
+    const totalSpan = document.getElementById("total");
+    const badgeCount = document.getElementById("cartCountBadge");
+    let total = 0;
+    
+    if (!listaUl) return;
+    if (carrito.length === 0) {
+      listaUl.innerHTML = '<li class="text-muted text-center py-3">🛒 Aún no agregas productos</li>';
+      if (totalSpan) totalSpan.innerText = "0";
+      if (badgeCount) badgeCount.innerText = "0";
+      return;
+    }
+    
+    let itemsHtml = "";
+    carrito.forEach((item, idx) => {
+      total += item.precio;
+      itemsHtml += `
+        <li class="d-flex justify-content-between align-items-center">
+          <div class="d-flex flex-column">
+            <span class="fw-semibold">${item.nombre}</span>
+            <small class="text-secondary">$${item.precio}</small>
+          </div>
+          <button class="btn btn-sm btn-outline-danger rounded-circle" onclick="eliminarDelCarrito(${idx})" style="width:32px;height:32px;">
+            <i class="bi bi-trash3-fill"></i>
+          </button>
+        </li>
+      `;
+    });
+    listaUl.innerHTML = itemsHtml;
+    if (totalSpan) totalSpan.innerText = total;
+    if (badgeCount) badgeCount.innerText = carrito.length;
+  }
+
+  // ======================== GEOLOCALIZACIÓN (DOMICILIO) ========================
+  function obtenerUbicacion() {
+    const statusDiv = document.getElementById("locationStatus");
+    if (!navigator.geolocation) {
+      statusDiv.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> Tu navegador no soporta geolocalización';
+      statusDiv.classList.add("bg-danger", "text-white");
+      return;
+    }
+    statusDiv.innerHTML = '<i class="bi bi-hourglass-split"></i> Obteniendo ubicación...';
+    statusDiv.classList.remove("bg-success", "bg-danger");
+    statusDiv.classList.add("bg-info", "text-white");
+    
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        ubicacionGuardada = { lat, lng, direccionTexto: null };
+        
+        // Intentar obtener dirección mediante reverse geocoding (opcional, para mostrar calle)
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
+          .then(res => res.json())
+          .then(data => {
+            let direccionAprox = data.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+            if (direccionAprox.length > 70) direccionAprox = direccionAprox.substring(0, 70) + "...";
+            ubicacionGuardada.direccionTexto = direccionAprox;
+            statusDiv.innerHTML = `<i class="bi bi-check-circle-fill"></i> Ubicación obtenida: ${direccionAprox.substring(0, 55)}`;
+            statusDiv.classList.remove("bg-info");
+            statusDiv.classList.add("bg-success", "text-white");
+            // Rellenar campo dirección automáticamente si está vacío
+            const inputDir = document.getElementById("direccion");
+            if (inputDir && !inputDir.value.trim()) {
+              inputDir.value = direccionAprox;
+            }
+          })
+          .catch(() => {
+            statusDiv.innerHTML = `<i class="bi bi-geo-alt-fill"></i> Ubicación: ${lat.toFixed(5)}, ${lng.toFixed(5)} (lista para enviar)`;
+            statusDiv.classList.remove("bg-info");
+            statusDiv.classList.add("bg-success", "text-white");
+            const inputDir = document.getElementById("direccion");
+            if (inputDir && !inputDir.value.trim()) {
+              inputDir.value = `Coordenadas: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+            }
+          });
+      },
+      (error) => {
+        console.error("Error de geolocalización", error);
+        let mensajeError = "❌ No se pudo obtener ubicación. ";
+        if (error.code === 1) mensajeError += "Permite el acceso en tu navegador.";
+        else if (error.code === 2) mensajeError += "Ubicación no disponible.";
+        else mensajeError += "Intenta de nuevo.";
+        statusDiv.innerHTML = `<i class="bi bi-x-circle-fill"></i> ${mensajeError}`;
+        statusDiv.classList.remove("bg-info", "bg-success");
+        statusDiv.classList.add("bg-danger", "text-white");
+        ubicacionGuardada = null;
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }
+
+  // ======================== WHATSAPP CON UBICACIÓN (DOMICILIO) ========================
+  function whatsappConUbicacion() {
+    let cliente = document.getElementById("cliente").value.trim();
+    let direccionManual = document.getElementById("direccion").value.trim();
+    
+    if (cliente === "") {
+      mostrarAlerta("⚠️ Por favor ingresa tu nombre.", "warning");
+      return;
+    }
+    if (carrito.length === 0) {
+      mostrarAlerta("🛒 Agrega productos al pedido antes de enviar.", "warning");
+      return;
+    }
+    if (direccionManual === "" && !ubicacionGuardada) {
+      mostrarAlerta("📍 Por favor ingresa una dirección o usa 'Mi ubicación actual'.", "warning");
+      return;
+    }
+    
+    let total = 0;
+    let mensaje = `🍗 *PEDIDO POLLERÍA EL BUEN CORTE* 🥩%0A`;
+    mensaje += `👤 *Cliente:* ${encodeURIComponent(cliente)}%0A`;
+    mensaje += `📦 *Pedido:*%0A`;
+    
+    carrito.forEach(p => {
+      mensaje += `▸ ${p.nombre} - $${p.precio}%0A`;
+      total += p.precio;
+    });
+    
+    mensaje += `%0A💰 *Total:* $${total}%0A`;
+    mensaje += `🚚 *Tipo de entrega:* A DOMICILIO%0A`;
+    
+    // Priorizar dirección manual si fue escrita, si no usar ubicación guardada
+    let direccionFinal = "";
+    if (direccionManual !== "") {
+      direccionFinal = direccionManual;
+      mensaje += `📍 *Dirección:* ${encodeURIComponent(direccionFinal)}%0A`;
+    } else if (ubicacionGuardada) {
+      if (ubicacionGuardada.direccionTexto) {
+        direccionFinal = ubicacionGuardada.direccionTexto;
+        mensaje += `📍 *Dirección (geolocalización):* ${encodeURIComponent(direccionFinal)}%0A`;
+      } else {
+        const coordsLink = `https://maps.google.com/?q=${ubicacionGuardada.lat},${ubicacionGuardada.lng}`;
+        mensaje += `📍 *Ubicación GPS:* ${encodeURIComponent(coordsLink)}%0A`;
+      }
+    }
+    
+    mensaje += `📱 *Gracias por preferirnos!* 🔥%0A`;
+    
+    const telefono = "528211171741";
+    const url = `https://wa.me/${telefono}?text=${mensaje}`;
+    window.open(url, '_blank');
+  }
+
+  // Alerta flotante elegante
+  function mostrarAlerta(texto, tipo = "warning") {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${tipo} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow-lg`;
+    alertDiv.style.zIndex = '9999';
+    alertDiv.style.minWidth = '280px';
+    alertDiv.innerHTML = `${texto} <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+    document.body.appendChild(alertDiv);
+    setTimeout(() => {
+      if(alertDiv) alertDiv.remove();
+    }, 3000);
+    // Inicializar cierre de Bootstrap si está disponible
+    if (typeof bootstrap !== 'undefined') {
+      new bootstrap.Alert(alertDiv);
+    }
+  }
+
+  // ======================== PDF con datos de ubicación ========================
+  function pdf() {
+    if (carrito.length === 0) {
+      mostrarAlerta("📄 No hay productos en el pedido para generar ticket.", "danger");
+      return;
+    }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const clienteNombre = document.getElementById("cliente").value.trim() || "Cliente";
+    const direccionTexto = document.getElementById("direccion").value.trim() || (ubicacionGuardada?.direccionTexto || "No especificada");
+    const fecha = new Date().toLocaleString();
+    
+    doc.setFillColor(255, 140, 66);
+    doc.rect(0, 0, 210, 35, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text("POLLERÍA EL BUEN CORTE", 20, 18);
+    doc.setFontSize(10);
+    doc.text("Carnes premium · Frescura garantizada", 20, 28);
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(10);
+    doc.text(`Ticket #${Math.floor(Math.random() * 9999)}`, 150, 12);
+    doc.text(`Fecha: ${fecha}`, 20, 45);
+    doc.text(`Cliente: ${clienteNombre}`, 20, 55);
+    doc.text(`Dirección de envío: ${direccionTexto.substring(0, 70)}`, 20, 65);
+    
+    let y = 80;
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Detalle del pedido:", 20, y);
+    y += 8;
+    doc.setFont("helvetica", "normal");
+    let total = 0;
+    
+    carrito.forEach((item) => {
+      const linea = `${item.nombre} ................................... $${item.precio}`;
+      doc.text(linea, 20, y);
+      total += item.precio;
+      y += 7;
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
+    });
+    
+    y += 10;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.text(`Total a pagar: $${total} MXN`, 20, y);
+    y += 12;
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "italic");
+    doc.text("Gracias por su compra - Envío a domicilio confirmado.", 20, y + 5);
+    doc.text("El repartidor usará la dirección indicada.", 20, y + 12);
+    
+    doc.setDrawColor(220);
+    doc.line(20, 280, 190, 280);
+    doc.setFontSize(8);
+    doc.text("Pollería El Buen Corte - Calle Fresca 123, Col. Centro", 20, 288);
+    
+    doc.save(`ticket_delivery_${Date.now()}.pdf`);
+  }
+
+  // Configurar botón flotante de WhatsApp
+  function setupFloatButton() {
+    const floatBtn = document.getElementById('floatWhatsappBtn');
+    if (floatBtn) {
+      floatBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (carrito.length === 0) {
+          mostrarAlerta("🛒 Agrega productos al carrito para contactar por WhatsApp.", "warning");
+          return;
+        }
+        whatsappConUbicacion();
+      });
+    }
+  }
+
+  // Exponer funciones globales
+  window.agregarAlCarrito = agregarAlCarrito;
+  window.eliminarDelCarrito = eliminarDelCarrito;
+  window.obtenerUbicacion = obtenerUbicacion;
+  window.whatsappConUbicacion = whatsappConUbicacion;
+  window.pdf = pdf;
+
+  function init() {
+    cargarProductos();
+    actualizarInterfazCarrito();
+    setupFloatButton();
+  }
+  
+  init();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #f1e6dc; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: #ff8c42; border-radius: 10px; }
+  .cart-list li button { background: none; border: none; transition: all 0.1s; }
+  .cart-list li button:hover { background: #fee2d0; transform: scale(1.05); }
+  .btn-agregar:active { transform: scale(0.94);}
+  .btn-location { background: #4c6ef5; }
+  .btn-location:hover { background: #3b5bdb; }
+</style>
+</body>
+</html>
