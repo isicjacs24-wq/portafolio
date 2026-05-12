@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tienda Aurora | Demo Bootstrap 5</title>
+  <meta name="description" content="Demo de tienda con catalogo, promociones y contacto directo por WhatsApp.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #667085;
+      --brand: #0f766e;
+      --brand-dark: #115e59;
+      --accent: #f59e0b;
+      --soft: #f3f7f5;
+      --line: #d7e2dc;
+    }
+
+    * {
+      letter-spacing: 0;
+    }
+
+    body {
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+    }
+
+    .navbar {
+      border-bottom: 1px solid rgba(31, 41, 51, 0.08);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      color: var(--brand-dark);
+    }
+
+    .btn {
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .btn-brand {
+      color: #ffffff;
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    .btn-brand:hover,
+    .btn-brand:focus {
+      color: #ffffff;
+      background: var(--brand-dark);
+      border-color: var(--brand-dark);
+    }
+
+    .btn-outline-brand {
+      color: var(--brand-dark);
+      border-color: var(--brand);
+    }
+
+    .btn-outline-brand:hover,
+    .btn-outline-brand:focus {
+      color: #ffffff;
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+      background:
+        linear-gradient(90deg, rgba(13, 45, 42, 0.86), rgba(13, 45, 42, 0.45)),
+        url("https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+    }
+
+    .hero .container {
+      padding-top: 4rem;
+      padding-bottom: 5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .4rem .75rem;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      font-size: clamp(2.4rem, 6vw, 5.4rem);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .hero p {
+      max-width: 610px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1.16rem;
+    }
+
+    .quick-stat {
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    .section-pad {
+      padding: 5rem 0;
+    }
+
+    .section-soft {
+      background: var(--soft);
+    }
+
+    .section-title {
+      max-width: 720px;
+    }
+
+    .section-title h2 {
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .text-muted-custom {
+      color: var(--muted);
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: .45rem .9rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--brand-dark);
+      background: #ffffff;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .product-card {
+      height: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(15, 118, 110, 0.14);
+    }
+
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .badge-soft {
+      color: #7c4a03;
+      background: #fff4d6;
+      border: 1px solid #f9d57c;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: #ffffff;
+      background: var(--brand);
+      font-weight: 900;
+    }
+
+    .promo-band {
+      color: #ffffff;
+      background:
+        linear-gradient(90deg, rgba(15, 118, 110, 0.95), rgba(17, 94, 89, 0.72)),
+        url("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+    }
+
+    .store-photo {
+      min-height: 420px;
+      border-radius: 8px;
+      background: url("https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
+    }
+
+    .info-row {
+      border-bottom: 1px solid var(--line);
+      padding: 1rem 0;
+    }
+
+    .info-row:last-child {
+      border-bottom: 0;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 1030;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      min-height: 52px;
+      padding: .8rem 1rem;
+      border-radius: 8px;
+      color: #ffffff;
+      background: #25d366;
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 18px 36px rgba(37, 211, 102, 0.32);
+    }
+
+    .whatsapp-float:hover,
+    .whatsapp-float:focus {
+      color: #ffffff;
+      background: #1da851;
+    }
+
+    footer {
+      background: #101828;
+      color: #ffffff;
+    }
+
+    footer a {
+      color: #d1fadf;
+    }
+
+    @media (max-width: 767.98px) {
+      .hero {
+        min-height: 86vh;
+      }
+
+      .hero .container {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+      }
+
+      .section-pad {
+        padding: 3.5rem 0;
+      }
+
+      .whatsapp-float span:last-child {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Tienda Aurora</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ubicacion">Ubicacion</a></li>
+        </ul>
+        <a class="btn btn-brand ms-lg-3" href="https://wa.me/5218123456789?text=Hola%2C%20quiero%20informacion%20sobre%20sus%20productos" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-eyebrow mb-4">Abarrotes, regalos y compras rapidas</div>
+      <h1 class="mb-4">Todo lo que necesitas, cerca de casa.</h1>
+      <p class="mb-4">Demo para tienda local con catalogo, promociones, horarios y contacto directo por WhatsApp para recibir pedidos sin complicaciones.</p>
+      <div class="d-flex flex-column flex-sm-row gap-3 mb-5">
+        <a class="btn btn-brand btn-lg" href="https://wa.me/5218123456789?text=Hola%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Hacer pedido</a>
+        <a class="btn btn-light btn-lg" href="#productos">Ver catalogo</a>
+      </div>
+      <div class="row g-4">
+        <div class="col-6 col-lg-3">
+          <div class="quick-stat">
+            <div class="h3 fw-black mb-0">+250</div>
+            <div>productos</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="quick-stat">
+            <div class="h3 fw-black mb-0">15 min</div>
+            <div>respuesta</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="quick-stat">
+            <div class="h3 fw-black mb-0">7 dias</div>
+            <div>abierto</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="quick-stat">
+            <div class="h3 fw-black mb-0">Local</div>
+            <div>atencion cercana</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-pad" id="productos">
+      <div class="container">
+        <div class="section-title mb-4">
+          <span class="text-uppercase fw-bold text-muted-custom">Catalogo destacado</span>
+          <h2 class="mt-2 mb-3">Productos listos para vender por mensaje.</h2>
+          <p class="text-muted-custom mb-0">Cambia nombres, precios, fotos y categorias para adaptar esta demo a una tienda de abarrotes, boutique, ferreteria o negocio de barrio.</p>
+        </div>
+
+        <div class="d-flex gap-2 flex-wrap mb-4">
+          <a class="category-pill" href="#">Despensa</a>
+          <a class="category-pill" href="#">Bebidas</a>
+          <a class="category-pill" href="#">Limpieza</a>
+          <a class="category-pill" href="#">Regalos</a>
+          <a class="category-pill" href="#">Ofertas</a>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?auto=format&fit=crop&w=800&q=80" alt="Canasta de productos basicos">
+              <div class="p-3">
+                <span class="badge badge-soft mb-2">Mas vendido</span>
+                <h3 class="h5 fw-bold">Canasta basica</h3>
+                <p class="text-muted-custom">Arroz, frijol, aceite, azucar y cafe para la semana.</p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <strong>$349 MXN</strong>
+                  <a class="btn btn-sm btn-outline-brand" href="https://wa.me/5218123456789?text=Hola%2C%20me%20interesa%20la%20Canasta%20basica" target="_blank" rel="noopener">Pedir</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=800&q=80" alt="Bebidas frias en refrigerador">
+              <div class="p-3">
+                <span class="badge badge-soft mb-2">Frio</span>
+                <h3 class="h5 fw-bold">Bebidas surtidas</h3>
+                <p class="text-muted-custom">Refrescos, agua, jugos y energeticas para reuniones.</p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <strong>Desde $18</strong>
+                  <a class="btn btn-sm btn-outline-brand" href="https://wa.me/5218123456789?text=Hola%2C%20me%20interesan%20las%20Bebidas%20surtidas" target="_blank" rel="noopener">Pedir</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=800&q=80" alt="Productos de limpieza">
+              <div class="p-3">
+                <span class="badge badge-soft mb-2">Hogar</span>
+                <h3 class="h5 fw-bold">Kit de limpieza</h3>
+                <p class="text-muted-custom">Detergente, cloro, suavizante y multiusos en paquete.</p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <strong>$219 MXN</strong>
+                  <a class="btn btn-sm btn-outline-brand" href="https://wa.me/5218123456789?text=Hola%2C%20me%20interesa%20el%20Kit%20de%20limpieza" target="_blank" rel="noopener">Pedir</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <article class="product-card">
+              <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=800&q=80" alt="Caja de regalo">
+              <div class="p-3">
+                <span class="badge badge-soft mb-2">Detalle</span>
+                <h3 class="h5 fw-bold">Regalo express</h3>
+                <p class="text-muted-custom">Caja armada con dulces, tarjeta y envoltura lista.</p>
+                <div class="d-flex align-items-center justify-content-between">
+                  <strong>$189 MXN</strong>
+                  <a class="btn btn-sm btn-outline-brand" href="https://wa.me/5218123456789?text=Hola%2C%20me%20interesa%20el%20Regalo%20express" target="_blank" rel="noopener">Pedir</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad section-soft" id="servicios">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5">
+            <span class="text-uppercase fw-bold text-muted-custom">Atencion practica</span>
+            <h2 class="mt-2 mb-3 fw-black">Compra rapido y confirma por WhatsApp.</h2>
+            <p class="text-muted-custom">La pagina esta pensada para negocios que quieren mostrar productos sin montar una tienda en linea completa. El cliente pregunta, confirma disponibilidad y acuerda entrega.</p>
+            <a class="btn btn-brand" href="https://wa.me/5218123456789?text=Hola%2C%20quiero%20cotizar%20una%20compra" target="_blank" rel="noopener">Cotizar ahora</a>
+          </div>
+          <div class="col-lg-7">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="h-100 p-4 bg-white border rounded-2">
+                  <div class="feature-icon mb-3">1</div>
+                  <h3 class="h5 fw-bold">Pedidos por mensaje</h3>
+                  <p class="text-muted-custom mb-0">Cada producto puede abrir WhatsApp con un texto ya escrito para reducir friccion.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="h-100 p-4 bg-white border rounded-2">
+                  <div class="feature-icon mb-3">2</div>
+                  <h3 class="h5 fw-bold">Promociones visibles</h3>
+                  <p class="text-muted-custom mb-0">Destaca paquetes, combos y descuentos de temporada en la primera visita.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="h-100 p-4 bg-white border rounded-2">
+                  <div class="feature-icon mb-3">3</div>
+                  <h3 class="h5 fw-bold">Datos del negocio</h3>
+                  <p class="text-muted-custom mb-0">Horarios, direccion, metodos de pago y entrega quedan en una sola pagina.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="h-100 p-4 bg-white border rounded-2">
+                  <div class="feature-icon mb-3">4</div>
+                  <h3 class="h5 fw-bold">Facil de adaptar</h3>
+                  <p class="text-muted-custom mb-0">Sirve como base para abarrotes, boutiques, minisuper, papeleria o ferreteria.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="promo-band section-pad">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="text-uppercase fw-bold">Promo de la semana</span>
+            <h2 class="display-5 fw-black mt-2 mb-3">Envia tu lista y recibe opciones en minutos.</h2>
+            <p class="mb-0">Ideal para clientes que no quieren navegar todo el catalogo. Un solo boton, una lista y una conversacion directa.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a class="btn btn-light btn-lg" href="https://wa.me/5218123456789?text=Hola%2C%20esta%20es%20mi%20lista%20de%20compra%3A" target="_blank" rel="noopener">Enviar mi lista</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="ubicacion">
+      <div class="container">
+        <div class="row g-5 align-items-stretch">
+          <div class="col-lg-6">
+            <div class="store-photo h-100" role="img" aria-label="Persona pagando en una tienda"></div>
+          </div>
+          <div class="col-lg-6">
+            <span class="text-uppercase fw-bold text-muted-custom">Visitanos</span>
+            <h2 class="mt-2 mb-4 fw-black">Tienda Aurora, Colonia Centro.</h2>
+            <div class="info-row">
+              <strong>Direccion</strong>
+              <p class="text-muted-custom mb-0">Av. Principal #123, Centro, Monterrey, N.L.</p>
+            </div>
+            <div class="info-row">
+              <strong>Horario</strong>
+              <p class="text-muted-custom mb-0">Lunes a domingo, 8:00 a.m. a 10:00 p.m.</p>
+            </div>
+            <div class="info-row">
+              <strong>Formas de pago</strong>
+              <p class="text-muted-custom mb-0">Efectivo, transferencia y tarjeta en tienda.</p>
+            </div>
+            <div class="info-row">
+              <strong>Contacto</strong>
+              <p class="text-muted-custom mb-0">WhatsApp: +52 1 81 2345 6789</p>
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+              <a class="btn btn-brand" href="https://wa.me/5218123456789?text=Hola%2C%20quiero%20saber%20si%20tienen%20servicio%20a%20domicilio" target="_blank" rel="noopener">Preguntar por entrega</a>
+              <a class="btn btn-outline-brand" href="https://maps.google.com/?q=Monterrey%20Centro" target="_blank" rel="noopener">Abrir mapa</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-4">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+        <div>
+          <strong>Tienda Aurora</strong>
+          <div class="text-white-50">Demo Bootstrap 5 para negocios locales.</div>
+        </div>
+        <div class="d-flex gap-3">
+          <a href="#productos">Productos</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#ubicacion">Ubicacion</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/5218123456789?text=Hola%2C%20vi%20su%20pagina%20y%20quiero%20informacion" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <span>WhatsApp</span>
+    <span>Contactar</span>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
