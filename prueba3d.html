@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>AutoElite | Agencia Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #161616;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent: #d4af37;
+            --accent-hover: #f1c40f;
+            --glass-bg: rgba(22, 22, 22, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-cta {
+            background: var(--accent);
+            color: var(--bg-primary) !important;
+            padding: 8px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-cta:hover { background: var(--accent-hover) !important; color: var(--bg-primary) !important; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-main);
+            transition: all 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(to right, rgba(10, 10, 10, 0.85) 20%, rgba(10, 10, 10, 0.4) 100%), url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1920&h=1080&fit=crop') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+            animation: heroFadeIn 1s ease forwards;
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-tag {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 10vw, 80px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span { color: var(--accent); }
+
+        .hero p {
+            font-size: clamp(14px, 2vw, 18px);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        .section-title {
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .section-title span { color: var(--accent); }
+
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 20px auto 0;
+        }
+
+        /* ===== NOSOTROS ===== */
+        .about {
+            background: var(--bg-secondary);
+            padding: 60px 50px 80px;
+            text-align: center;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== CATALOG SLIDER (CARRUSEL INFINITO) ===== */
+        .catalog {
+            background: var(--bg-primary);
+            padding: 60px 0 80px;
+            overflow: hidden;
+        }
+
+        .catalog-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .catalog-header p {
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: scrollInfinite 25s linear infinite;
+            will-change: transform;
+        }
+
+        .carousel-container:hover .carousel-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollInfinite {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .car-card {
+            width: 380px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .car-card:hover .car-image img {
+            transform: scale(1.08);
+        }
+
+        .car-info {
+            padding: 25px;
+        }
+
+        .car-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .car-price {
+            font-size: 24px;
+            color: var(--accent);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .car-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .spec {
+            text-align: center;
+            flex: 1;
+        }
+
+        .spec span {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .spec strong {
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .car-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-email {
+            background: var(--bg-primary);
+            color: var(--text-main);
+            text-align: center;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-email:hover {
+            border-color: var(--accent);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-3d {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: var(--accent);
+            text-align: center;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .btn-3d:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        /* ===== VISOR 3D SECTION ===== */
+        .viewer-section {
+            background: var(--bg-primary);
+            padding: 60px 0 80px;
+        }
+
+        .viewer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 1100px) {
+            .viewer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .viewer-frame-wrap {
+            background: linear-gradient(135deg, #0a0a0a 0%, #0d0d0d 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .viewer-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(0,0,0,0.5);
+        }
+
+        .viewer-car-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .viewer-live-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--accent);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2ecc71;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .viewer-iframe {
+            width: 100%;
+            height: 480px;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .viewer-iframe { height: 320px; }
+        }
+
+        .viewer-hints {
+            display: flex;
+            gap: 15px;
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.4);
+            border-top: 1px solid var(--glass-border);
+            flex-wrap: wrap;
+        }
+
+        .hint-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .highlight-part {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .parts-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .parts-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .part-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px 18px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-top: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            width: 100%;
+            color: var(--text-main);
+        }
+
+        .part-btn:first-child { border-radius: 8px 8px 0 0; border-top: 1px solid var(--glass-border); }
+        .part-btn:last-child { border-radius: 0 0 8px 8px; }
+
+        .part-btn:hover, .part-btn.active {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--accent);
+        }
+
+        .part-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .part-btn:hover .part-icon, .part-btn.active .part-icon {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .part-text h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .part-text p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .part-arrow {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .part-btn:hover .part-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* ===== CONTACTO ===== */
+        .contact {
+            background: var(--bg-secondary);
+            padding: 80px 50px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .contact-info strong {
+            color: var(--text-main);
+        }
+
+        .socials {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .socials a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 800;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .socials a:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: translateY(-3px);
+        }
+
+        .map-container {
+            flex: 1;
+            min-width: 300px;
+            height: 350px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== INFO PANEL MODAL ===== */
+        .info-panel {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .info-panel.visible { display: flex; }
+
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            max-width: 560px;
+            width: 100%;
+            overflow: hidden;
+            animation: slideUp 0.35s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-card-header {
+            padding: 25px 30px 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 8px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .info-card-header h3 {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .info-card-header p {
+            font-size: 12px;
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        .info-close {
+            margin-left: auto;
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--glass-border);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .info-close:hover { border-color: var(--accent); color: var(--accent); }
+
+        .info-card-body {
+            padding: 25px 30px;
+        }
+
+        .info-desc {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .info-specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info-spec {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .info-spec-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .info-spec-val {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .info-tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .info-tag {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        /* ===== TOOLTIP FLOTANTE ===== */
+        #clickTooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            z-index: 100;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        @keyframes tooltipPop {
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 20px 30px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .mobile-menu a:last-child { border-bottom: none; }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            nav { padding: 15px 25px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero { padding: 0 20px; }
+            .about { padding: 40px 25px 60px; }
+            .contact { padding: 50px 25px; flex-direction: column; }
+            .car-card { width: 320px; }
+        }
+
+        @media (max-width: 480px) {
+            .car-card { width: 280px; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn, .btn-outline { text-align: center; }
+            #clickTooltip { font-size: 11px; white-space: normal; width: 90%; text-align: center; bottom: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Auto<span>Elite</span></div>
+    <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#catalogo">Vehículos</a></li>
+        <li><a href="#visor3d">Visor 3D</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#" class="nav-cta" onclick="abrirWhatsApp()">Cotizar Ahora</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" onclick="toggleMenu()">Inicio</a>
+    <a href="#nosotros" onclick="toggleMenu()">Nosotros</a>
+    <a href="#catalogo" onclick="toggleMenu()">Vehículos</a>
+    <a href="#visor3d" onclick="toggleMenu()">Visor 3D</a>
+    <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+    <a href="#" onclick="abrirWhatsApp(); toggleMenu()" style="color:var(--accent);">Cotizar Ahora →</a>
+</div>
+
+<!-- HERO SECTION -->
+<section id="inicio" class="hero">
+    <div class="hero-content">
+        <div class="hero-tag">Agencia Premium de Vehículos</div>
+        <h1>Descubre la <span>Excelencia</span><br>en Movimiento</h1>
+        <p>Vehículos exclusivos para clientes extraordinarios. Experimenta el lujo, el diseño y el desempeño que solo AutoElite puede ofrecerte.</p>
+        <div class="hero-buttons">
+            <a href="#catalogo" class="btn">Ver Catálogo</a>
+            <a href="#contacto" class="btn-outline">Contactar Asesor</a>
+        </div>
+    </div>
+</section>
+
+<!-- NOSOTROS SECTION -->
+<section id="nosotros" class="about reveal">
+    <div class="section-header">
+        <h2 class="section-title">Sobre <span>Nosotros</span></h2>
+        <div class="section-divider"></div>
+    </div>
+    <p>En AutoElite, no solo vendemos automóviles; entregamos experiencias inigualables. Somos la agencia líder en la comercialización de vehículos premium en México, enfocados en satisfacer los gustos más exigentes. Nuestro compromiso es la transparencia, el trato personalizado y la garantía de llevarte a casa una obra maestra de la ingeniería moderna.</p>
+</section>
+
+<!-- CATÁLOGO - CARRUSEL INFINITO AUTOMÁTICO -->
+<section id="catalogo" class="catalog">
+    <div class="catalog-header reveal">
+        <h2 class="section-title">Vehículos <span>Disponibles</span></h2>
+        <p>✨ Desliza para explorar | Pasa el cursor para detener el movimiento</p>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack"></div>
+    </div>
+</section>
+
+<!-- VISOR 3D SECTION -->
+<section id="visor3d" class="viewer-section">
+    <div class="section-header reveal">
+        <h2 class="section-title">Visor <span>Interactivo 3D</span></h2>
+        <div class="section-divider"></div>
+    </div>
+
+    <div class="viewer-container">
+        <div class="viewer-left reveal">
+            <div class="viewer-frame-wrap">
+                <div class="viewer-top-bar">
+                    <div class="viewer-car-title">CHEVROLET MONZA 2023</div>
+                    <div class="viewer-live-badge">
+                        <div class="live-dot"></div>
+                        3D EN VIVO
+                    </div>
+                </div>
+                <iframe class="viewer-iframe" id="sketchfabIframe" title="Chevrolet Monza 2023" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" src="https://sketchfab.com/models/dfda867b4f3b4696819b3e55d04d6db4/embed?autostart=1&ui_controls=1&ui_infos=0&ui_help=0&ui_stop=0&ui_annotations=0&ui_vr=0&preload=1&transparent=0&autospin=0"></iframe>
+                <div id="clickTooltip"></div>
+                <div class="viewer-hints">
+                    <div class="hint-pill">🖱️ Arrastrar → Rotar 360°</div>
+                    <div class="hint-pill">🔍 Pellizcar → Zoom</div>
+                    <div class="hint-pill">👆 ¡Clic en cualquier parte del auto! → Info detallada</div>
+                    <div id="apiStatus" class="hint-pill">⏳ Cargando modelo 3D...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="parts-panel reveal">
+            <div class="parts-title">🔍 EXPLORAR PARTES</div>
+            <button class="part-btn" data-part="llantas" onclick="mostrarParteClick('llantas', this)">
+                <div class="part-icon">🔵</div>
+                <div class="part-text"><h4>Llantas & Rines</h4><p>Ruedas deportivas aleación 16"</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <button class="part-btn" data-part="motor" onclick="mostrarParteClick('motor', this)">
+                <div class="part-icon">⚙️</div>
+                <div class="part-text"><h4>Motor Turbo</h4><p>1.3L SIDI Turbo 163 HP</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <button class="part-btn" data-part="interior" onclick="mostrarParteClick('interior', this)">
+                <div class="part-icon">🎨</div>
+                <div class="part-text"><h4>Interior Premium</h4><p>Cabina piel y pantalla 10"</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <button class="part-btn" data-part="frenado" onclick="mostrarParteClick('frenado', this)">
+                <div class="part-icon">🛑</div>
+                <div class="part-text"><h4>Sistema de Frenos</h4><p>ABS + EBD + discos ventilados</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <button class="part-btn" data-part="suspension" onclick="mostrarParteClick('suspension', this)">
+                <div class="part-icon">🔧</div>
+                <div class="part-text"><h4>Suspensión</h4><p>Independiente McPherson</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <button class="part-btn" data-part="faros" onclick="mostrarParteClick('faros', this)">
+                <div class="part-icon">💡</div>
+                <div class="part-text"><h4>Iluminación LED</h4><p>LED Matrix proyectores</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <button class="part-btn" data-part="aerodinamica" onclick="mostrarParteClick('aerodinamica', this)">
+                <div class="part-icon">💨</div>
+                <div class="part-text"><h4>Aerodinámica</h4><p>Coeficiente Cx 0.28</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <button class="part-btn" data-part="conectividad" onclick="mostrarParteClick('conectividad', this)">
+                <div class="part-icon">📱</div>
+                <div class="part-text"><h4>Conectividad</h4><p>Apple CarPlay + Android Auto</p></div>
+                <div class="part-arrow">→</div>
+            </button>
+            <div style="margin-top:20px;">
+                <button class="btn" style="width:100%; justify-content:center;" onclick="abrirWhatsApp()">📞 Solicitar Cotización</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO Y UBICACIÓN -->
+<section id="contacto" class="contact">
+    <div class="contact-info reveal">
+        <h2 class="section-title">Nuestra <span>Ubicación</span></h2>
+        <div class="section-divider" style="margin: 15px 0 25px 0;"></div>
+        <p><strong>📍 Dirección:</strong> Av. Constitución 1234, Col. Centro<br>Monterrey, Nuevo León, MX</p>
+        <p><strong>📞 Teléfono:</strong> +52 (81) 1234-5678</p>
+        <p><strong>✉️ Email:</strong> ventas@autoelite.mx</p>
+        <p><strong>🕐 Horarios:</strong> Lunes a Sábado: 9:00 AM - 8:00 PM</p>
+        <div class="socials">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="Instagram">i</a>
+            <a href="#" title="Twitter">X</a>
+            <a href="#" title="WhatsApp" onclick="abrirWhatsApp(); return false;">W</a>
+        </div>
+    </div>
+    <div class="map-container reveal">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22824.303524707193!2d-100.35175372927368!3d25.70865671081604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662971ae30e8819%3A0x2cab1ee33c1bd34e!2sAuto%20Elite%20Prime!5e1!3m2!1ses!2smx!4v1778610563961!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 AutoElite. Todos los derechos reservados.</p>
+</footer>
+
+<!-- MODAL INFO PANEL -->
+<div class="info-panel" id="infoPanel">
+    <div class="info-card">
+        <div class="info-card-header">
+            <div class="info-card-icon" id="infoIcon">🔵</div>
+            <div><h3 id="infoTitle">Título</h3><p id="infoSubtitle">Subtítulo</p></div>
+            <button class="info-close" onclick="cerrarPanel()">✕</button>
+        </div>
+        <div class="info-card-body">
+            <p class="info-desc" id="infoDesc">Descripción</p>
+            <div class="info-specs-grid" id="infoSpecsGrid"></div>
+            <div class="info-tag-list" id="infoTags"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+<script>
+// ===== DATOS DE LOS VEHÍCULOS =====
+const cars = [
+    {
+        id: 1,
+        brand: "Chevrolet",
+        model: "Monza 2023",
+        price: "$22,990 USD",
+        description: "El sedán premium que combina lujo, tecnología y eficiencia. Equipado con motor turbo y acabados de primera calidad. ¡Experimenta el modelo 3D interactivo!",
+        image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&h=400&fit=crop",
+        specs: { motor: "1.3L Turbo", potencia: "163 HP", aceleracion: "8.4s" },
+        has3D: true
+    },
+    {
+        id: 2,
+        brand: "Chevrolet",
+        model: "Trax 2024",
+        price: "$19,500 USD",
+        description: "SUV compacta con diseño moderno, tecnología avanzada y eficiencia excepcional para la ciudad.",
+        image: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=600&h=400&fit=crop",
+        specs: { motor: "1.2L Turbo", potencia: "137 HP", aceleracion: "9.2s" },
+        has3D: false
+    },
+    {
+        id: 3,
+        brand: "Chevrolet",
+        model: "Equinox EV",
+        price: "$34,995 USD",
+        description: "SUV eléctrica con autonomía de 513 km, tecnología de punta y diseño futurista.",
+        image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=400&fit=crop",
+        specs: { motor: "Eléctrico", potencia: "290 HP", aceleracion: "6.5s" },
+        has3D: false
+    },
+    {
+        id: 4,
+        brand: "Chevrolet",
+        model: "Silverado 2024",
+        price: "$48,200 USD",
+        description: "Pickup premium con motor V8, capacidad de remolque excepcional y lujo inigualable.",
+        image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=600&h=400&fit=crop",
+        specs: { motor: "6.2L V8", potencia: "420 HP", aceleracion: "6.8s" },
+        has3D: false
+    },
+    {
+        id: 5,
+        brand: "Cadillac",
+        model: "Escalade 2024",
+        price: "$82,000 USD",
+        description: "SUV de ultra lujo con capacidad para 8 pasajeros, acabados artesanales y tecnología premium.",
+        image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=600&h=400&fit=crop",
+        specs: { motor: "6.2L V8", potencia: "420 HP", aceleracion: "6.2s" },
+        has3D: false
+    }
+];
+
+const WHATSAPP_NUMBER = "528112345678";
+const EMAIL_ADDRESS = "ventas@autoelite.mx";
+
+// ===== DATOS DE LAS PARTES PARA EL VISOR 3D =====
+const partsData = {
+    llantas: {
+        icon: '🔵',
+        title: 'LLANTAS & RINES',
+        subtitle: 'Sistema de Rodado Premium',
+        desc: 'Los rines de aleación de aluminio de 16" del Monza 2023 combinan ligereza, resistencia y estética deportiva. El diseño de 5 radios con acabado en plata brillante reduce el peso no suspendido mejorando la respuesta de la dirección y el confort de marcha. Las llantas de perfil bajo 205/55 R16 ofrecen excelente agarre en seco y mojado, con compuesto de goma de alta sílice para mayor durabilidad y menor resistencia a la rodadura.',
+        specs: [
+            { label: 'Medida', val: '205/55 R16' },
+            { label: 'Material Rin', val: 'Aluminio forjado' },
+            { label: 'Diseño', val: '5 radios deportivos' },
+            { label: 'Índice de carga', val: '91H' },
+            { label: 'Presión recomendada', val: '32 PSI' }
+        ],
+        tags: ['Bajo perfil', 'Alta resistencia', 'Rin 16"', 'Aluminio premium', 'Antideslizante']
+    },
+    motor: {
+        icon: '⚙️',
+        title: 'MOTOR 1.3L TURBO',
+        subtitle: 'SIDI Direct Injection Technology',
+        desc: 'El corazón del Monza 2023 es un motor 1.3L Turbo SIDI (Spark Ignition Direct Injection) de 4 cilindros que produce 163 HP y 220 Nm de torque. La tecnología de inyección directa maximiza la eficiencia del combustible mientras el turbocompresor de geometría variable elimina el turbo lag para una respuesta inmediata a cualquier velocidad. Su bloque de aluminio reduce el peso total del vehículo en 40kg comparado con motores tradicionales.',
+        specs: [
+            { label: 'Cilindrada', val: '1.3L / 4 cilindros' },
+            { label: 'Potencia máxima', val: '163 HP @ 5500 rpm' },
+            { label: 'Torque máximo', val: '220 Nm @ 2500 rpm' },
+            { label: 'Consumo mixto', val: '15 km/L' },
+            { label: 'Emisiones', val: 'Euro 6' }
+        ],
+        tags: ['SIDI Turbo', 'Inyección directa', 'Bloque aluminio', 'Start/Stop', 'Eco-mode']
+    },
+    interior: {
+        icon: '🎨',
+        title: 'INTERIOR PREMIUM',
+        subtitle: 'Cabina & Acabados de Lujo',
+        desc: 'La cabina del Monza 2023 fue diseñada para envolver al conductor en un ambiente de confort y tecnología. Los asientos con recubrimiento en piel sintética premium incluyen ajuste eléctrico de 6 posiciones y calefacción en versiones superiores. El volante multifunción forrado en piel, el tablero con insertos metálicos y la pantalla flotante de 10" crean una atmósfera moderna y refinada. El espacio interior ofrece una experiencia acústica superior con vidrios laminados que reducen el ruido exterior.',
+        specs: [
+            { label: 'Pantalla', val: '10" táctil HD' },
+            { label: 'Asientos', val: 'Piel premium con ajuste eléctrico' },
+            { label: 'Maletero', val: '469 litros' },
+            { label: 'Sistema de sonido', val: 'Bose 8 altavoces' },
+            { label: 'Climatización', val: 'Dual zone automático' }
+        ],
+        tags: ['Apple CarPlay', 'Android Auto', 'Calefacción asientos', 'Climatizador dual', 'Carga inalámbrica', 'Ambient LED']
+    },
+    frenado: {
+        icon: '🛑',
+        title: 'SISTEMA DE FRENOS',
+        subtitle: 'ABS + EBD + Brake Assist',
+        desc: 'El sistema de frenos del Monza 2023 combina discos ventilados en el eje delantero con tambores en el trasero, gestionados por el sistema ABS de última generación con distribución electrónica de frenada (EBD). El Brake Assist detecta situaciones de emergencia y maximiza la presión de frenado en milisegundos. El control de estabilidad ESC y el control de tracción ASR complementan la seguridad activa para una conducción segura en cualquier condición climática.',
+        specs: [
+            { label: 'Frenos delanteros', val: 'Disco ventilado Ø280mm' },
+            { label: 'Frenos traseros', val: 'Tambor Ø230mm' },
+            { label: 'Sistemas asistencia', val: 'ABS + EBD + BA' },
+            { label: 'Distancia 100-0', val: '38.5 metros' },
+            { label: 'Tecnología adicional', val: 'ESC + ASR + Hill Hold' }
+        ],
+        tags: ['ABS 4 canales', 'EBD electrónico', 'Brake Assist', 'ESC estabilidad', 'Control tracción', 'Hill Hold']
+    },
+    suspension: {
+        icon: '🔧',
+        title: 'SUSPENSIÓN',
+        subtitle: 'Sistema Independiente Optimizado',
+        desc: 'La suspensión delantera McPherson de doble amortiguación con resortes helicoidales garantiza una conducción precisa y absorbente. En el eje trasero, la suspensión de eje de torsión compacta optimiza el espacio del maletero sin sacrificar el confort. Los amortiguadores hidráulicos de gas calibrados específicamente para las condiciones de carretera latinoamericanas ofrecen el equilibrio ideal entre confort y deportividad, reduciendo el balanceo en curvas.',
+        specs: [
+            { label: 'Suspensión delantera', val: 'McPherson independiente' },
+            { label: 'Suspensión trasera', val: 'Eje de torsión optimizado' },
+            { label: 'Amortiguadores', val: 'Hidráulicos de gas' },
+            { label: 'Dirección', val: 'EPS asistida eléctrica' },
+            { label: 'Diámetro de giro', val: '10.8 metros' }
+        ],
+        tags: ['McPherson estabilizado', 'Anti-roll bar', 'EPS progresiva', 'Geometría optimizada', 'Confort A+']
+    },
+    faros: {
+        icon: '💡',
+        title: 'ILUMINACIÓN LED',
+        subtitle: 'Sistema Matrix Proyector',
+        desc: 'Los faros LED proyector del Monza 2023 ofrecen una iluminación 4 veces superior a los halógenos tradicionales con un consumo energético reducido en 60%. Las luces diurnas LED integradas en el diseño frontal mejoran la visibilidad y el reconocimiento del vehículo. Los faros traseros full-LED con firma luminosa exclusiva brindan identidad visual única de noche y ofrecen mayor tiempo de reacción a los conductores siguientes. Incluye sistema de encendido automático.',
+        specs: [
+            { label: 'Tecnología', val: 'LED Matrix con proyector' },
+            { label: 'Alcance luminoso', val: '120 metros' },
+            { label: 'Temperatura color', val: '6.000K Blanco frío' },
+            { label: 'Vida útil', val: '+25.000 horas' },
+            { label: 'Consumo', val: '60% menos que halógeno' }
+        ],
+        tags: ['LED Matrix', 'DRL integrado', 'Auto high-beam', 'Led trasero', 'Nivelación automática', 'Encendido automático']
+    },
+    aerodinamica: {
+        icon: '💨',
+        title: 'AERODINÁMICA',
+        subtitle: 'Coeficiente Cx 0.28',
+        desc: 'La carrocería del Monza 2023 fue esculpida en túnel de viento para lograr un coeficiente aerodinámico Cx de 0.28, uno de los mejores en su segmento. El spoiler trasero integrado, los parachoques moldeados activamente y el faldón inferior canalizan el flujo de aire reduciendo la resistencia y mejorando la estabilidad a alta velocidad. Esto se traduce directamente en menor consumo de combustible, menor ruido aerodinámico y mayor confort a velocidades de autopista.',
+        specs: [
+            { label: 'Coeficiente Cx', val: '0.28' },
+            { label: 'Área frontal', val: '2.12 m²' },
+            { label: 'Downforce generado', val: '+12 kg a 120 km/h' },
+            { label: 'Optimización', val: 'Túnel de viento - 200+ horas' },
+            { label: 'Reducción ruido', val: '3 dB a 100 km/h' }
+        ],
+        tags: ['Cx 0.28 récord', 'Spoiler integrado', 'Bajo consumo', 'Estabilidad alta velocidad', 'Wind tunnel tested']
+    },
+    conectividad: {
+        icon: '📱',
+        title: 'CONECTIVIDAD',
+        subtitle: 'Sistema MyLink+ Gen 4',
+        desc: 'El sistema de infoentretenimiento MyLink+ de cuarta generación cuenta con una pantalla táctil flotante de 10" con resolución HD y respuesta multi-touch. Compatible nativamente con Apple CarPlay y Android Auto de forma inalámbrica, sin necesidad de cables. El asistente de voz integrado permite controlar la navegación, el clima y la música sin soltar el volante. El Wi-Fi hotspot 4G LTE conecta hasta 7 dispositivos simultáneamente, convirtiendo tu auto en una oficina móvil.',
+        specs: [
+            { label: 'Pantalla', val: '10" HD touch flotante' },
+            { label: 'Navegación', val: 'Here Maps integrado con tráfico real' },
+            { label: 'Conectividad', val: 'Wi-Fi 4G + Bluetooth 5.0' },
+            { label: 'Sistema audio', val: '8 altavoces Bose Performance' },
+            { label: 'Carga', val: 'Inducción Qi inalámbrica' }
+        ],
+        tags: ['Apple CarPlay wireless', 'Android Auto wireless', 'Wi-Fi Hotspot 4G', 'Bluetooth 5.0', 'Carga inalámbrica', 'OTA Updates', 'Asistente voz']
+    }
+};
+
+// Variables globales
+let currentActiveButton = null;
+let apiSketchfab = null;
+
+// Funciones de generación de enlaces
+function generateWhatsAppLink(car) {
+    const message = `Hola AutoElite, estoy interesado en el vehículo ${car.brand} ${car.model} con precio de ${car.price}. ¿Podrían brindarme más información?`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+function generateEmailLink(car) {
+    const subject = `Cotización: ${car.brand} ${car.model}`;
+    const body = `Me gustaría solicitar una cotización para el vehículo:\n\nMarca: ${car.brand}\nModelo: ${car.model}\nPrecio: ${car.price}\n\nGracias.`;
+    return `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function abrirVisor3D() {
+    document.getElementById('visor3d').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Render del carrusel
+function renderCarousel() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+
+    const carsToRender = [...cars, ...cars, ...cars];
+
+    let htmlContent = '';
+    carsToRender.forEach(car => {
+        htmlContent += `
+            <div class="car-card">
+                <div class="car-image">
+                    <img src="${car.image}" alt="${car.brand} ${car.model}">
+                </div>
+                <div class="car-info">
+                    <h3>${car.brand} ${car.model}</h3>
+                    <div class="car-price">${car.price}</div>
+                    <p class="car-desc">${car.description}</p>
+                    <div class="car-specs">
+                        <div class="spec"><span>Motor</span><strong>${car.specs.motor}</strong></div>
+                        <div class="spec"><span>Potencia</span><strong>${car.specs.potencia}</strong></div>
+                        <div class="spec"><span>0-100 km/h</span><strong>${car.specs.aceleracion}</strong></div>
+                    </div>
+                    <div class="car-actions">
+                        ${car.has3D ? `<button class="btn-3d" onclick="abrirVisor3D()">🎮 Ver Modelo 3D Interactivo</button>` : ''}
+                        <a href="${generateWhatsAppLink(car)}" target="_blank" class="btn-whatsapp">💬 WhatsApp</a>
+                        <a href="${generateEmailLink(car)}" class="btn-email">✉️ Cotizar por Email</a>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    track.innerHTML = htmlContent;
+}
+
+// ===== FUNCIONES DEL VISOR 3D =====
+function mostrarParteClick(part, buttonElement) {
+    const d = partsData[part];
+    if (!d) return;
+
+    // Actualizar el modal
+    document.getElementById('infoIcon').textContent = d.icon;
+    document.getElementById('infoTitle').textContent = d.title;
+    document.getElementById('infoSubtitle').textContent = d.subtitle;
+    document.getElementById('infoDesc').innerHTML = d.desc;
+    document.getElementById('infoSpecsGrid').innerHTML = d.specs.map(s => `
+        <div class="info-spec">
+            <div class="info-spec-label">${s.label}</div>
+            <div class="info-spec-val">${s.val}</div>
+        </div>
+    `).join('');
+    document.getElementById('infoTags').innerHTML = d.tags.map(t => `<span class="info-tag">${t}</span>`).join('');
+
+    // Resaltar botón activo
+    if (currentActiveButton) {
+        currentActiveButton.classList.remove('active');
+    }
+    buttonElement.classList.add('active');
+    currentActiveButton = buttonElement;
+
+    // Mostrar panel
+    document.getElementById('infoPanel').classList.add('visible');
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarPanel() {
+    document.getElementById('infoPanel').classList.remove('visible');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('infoPanel').addEventListener('click', e => { 
+    if (e.target === document.getElementById('infoPanel')) cerrarPanel(); 
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarPanel(); });
+
+// Tooltip flotante
+let tooltipTimer = null;
+function showTooltip(message, isError = false) {
+    const tip = document.getElementById('clickTooltip');
+    tip.textContent = message;
+    tip.style.background = isError ? '#e74c3c' : 'var(--accent)';
+    tip.style.color = isError ? '#fff' : 'var(--bg-primary)';
+    tip.style.display = 'block';
+    tip.style.animation = 'none';
+    setTimeout(() => { tip.style.animation = 'tooltipPop 0.3s ease'; }, 10);
+    
+    clearTimeout(tooltipTimer);
+    tooltipTimer = setTimeout(() => { 
+        tip.style.display = 'none'; 
+        tip.style.background = 'var(--accent)';
+    }, 3000);
+}
+
+// Mapeo de palabras clave para detectar partes en el modelo 3D
+const meshToPartMap = [
+    { keywords: ['wheel', 'tire', 'tyre', 'rim', 'llanta', 'rueda', 'neumático', 'rin', 'roda', 'pneu', 'jante', 'disco_rueda'], part: 'llantas' },
+    { keywords: ['engine', 'motor', 'hood', 'capo', 'bonnet', 'block', 'turbo', 'exhaust', 'escape', 'radiador', 'radiator', 'valve', 'cylinder'], part: 'motor' },
+    { keywords: ['seat', 'asiento', 'interior', 'dashboard', 'tablero', 'steering', 'volante', 'console', 'consola', 'door', 'puerta', 'glass', 'vidrio', 'panel', 'cabin'], part: 'interior' },
+    { keywords: ['brake', 'freno', 'caliper', 'pinza', 'disc', 'rotor', 'pastilla', 'pedal'], part: 'frenado' },
+    { keywords: ['suspension', 'shock', 'spring', 'resorte', 'amortiguador', 'arm', 'wishbone', 'strut', 'axle', 'eje', 'coil'], part: 'suspension' },
+    { keywords: ['light', 'headlight', 'faro', 'luz', 'lamp', 'led', 'taillight', 'foglight', 'optical', 'lens', 'reflector'], part: 'faros' },
+    { keywords: ['body', 'carroceria', 'bumper', 'defensa', 'spoiler', 'fender', 'salpicadera', 'panel', 'trunk', 'cajuela', 'roof', 'techo', 'chasis', 'frame', 'aero'], part: 'aerodinamica' },
+    { keywords: ['screen', 'pantalla', 'radio', 'infotainment', 'antenna', 'antena', 'speaker', 'bocina', 'display', 'usb', 'nav', 'navigation', 'audio'], part: 'conectividad' }
+];
+
+function detectPartFromMeshName(meshName, instanceName) {
+    const combinedName = ((meshName || '') + ' ' + (instanceName || '')).toLowerCase();
+    
+    for (const mapping of meshToPartMap) {
+        for (const keyword of mapping.keywords) {
+            if (combinedName.includes(keyword)) {
+                console.log(`[AutoElite] Detectado: ${keyword} → ${mapping.part}`);
+                return mapping.part;
+            }
+        }
+    }
+    return null;
+}
+
+function handleMeshClick(meshName, instanceName) {
+    const partId = detectPartFromMeshName(meshName, instanceName);
+    
+    if (partId && partsData[partId]) {
+        // Mostrar información de la parte detectada
+        const d = partsData[partId];
+        document.getElementById('infoIcon').textContent = d.icon;
+        document.getElementById('infoTitle').textContent = d.title;
+        document.getElementById('infoSubtitle').textContent = d.subtitle;
+        document.getElementById('infoDesc').innerHTML = d.desc;
+        document.getElementById('infoSpecsGrid').innerHTML = d.specs.map(s => `
+            <div class="info-spec">
+                <div class="info-spec-label">${s.label}</div>
+                <div class="info-spec-val">${s.val}</div>
+            </div>
+        `).join('');
+        document.getElementById('infoTags').innerHTML = d.tags.map(t => `<span class="info-tag">${t}</span>`).join('');
+        
+        // Resaltar botón correspondiente
+        const buttons = document.querySelectorAll('.part-btn');
+        let foundButton = null;
+        buttons.forEach(btn => {
+            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(partId)) {
+                foundButton = btn;
+            }
+        });
+        
+        if (currentActiveButton) currentActiveButton.classList.remove('active');
+        if (foundButton) {
+            foundButton.classList.add('active');
+            currentActiveButton = foundButton;
+        }
+        
+        document.getElementById('infoPanel').classList.add('visible');
+        document.body.style.overflow = 'hidden';
+        showTooltip(`🔍 Mostrando información de: ${d.title}`);
+    } else {
+        const partName = meshName || instanceName || 'parte';
+        showTooltip(`📍 Has seleccionado: ${partName.substring(0, 30)}`, true);
+    }
+}
+
+// Inicializar API de Sketchfab
+function initSketchfabAPI() {
+    const iframe = document.getElementById('sketchfabIframe');
+    const statusEl = document.getElementById('apiStatus');
+
+    if (typeof window.Sketchfab === 'undefined') {
+        statusEl.textContent = '⚠️ SDK no disponible - Revisa conexión';
+        statusEl.style.color = '#e74c3c';
+        console.warn('[AutoElite] Sketchfab SDK no cargó');
+        return;
+    }
+
+    const client = new window.Sketchfab(iframe);
+    
+    client.init('dfda867b4f3b4696819b3e55d04d6db4', {
+        success: (api) => {
+            apiSketchfab = api;
+            statusEl.innerHTML = '✅ Modelo 3D Listo - ¡Haz clic en cualquier parte!';
+            statusEl.style.color = '#2ecc71';
+            console.log('[AutoElite] Visor 3D inicializado correctamente');
+            
+            api.start();
+            
+            api.addEventListener('viewerready', () => {
+                console.log('[AutoElite] Viewer ready - Evento de clic activado');
+                statusEl.innerHTML = '🎯 Haz clic en cualquier parte del auto →';
+                
+                // Evento de clic en el modelo 3D
+                api.addEventListener('click', (info) => {
+                    console.log('[AutoElite] Click detectado:', info);
+                    
+                    if (!info || (!info.instanceID && !info.nodeIndex)) {
+                        showTooltip('👆 Haz clic sobre una parte del vehículo', true);
+                        return;
+                    }
+                    
+                    // Obtener información del nodo clickeado
+                    api.getNodeMap((err, nodeMap) => {
+                        if (err) {
+                            console.error('[AutoElite] Error al obtener nodos:', err);
+                            showTooltip('⚠️ No se pudo identificar la parte', true);
+                            return;
+                        }
+                        
+                        let nodeName = '';
+                        let instanceName = '';
+                        
+                        if (info.instanceID !== undefined && nodeMap[info.instanceID]) {
+                            nodeName = nodeMap[info.instanceID].name || '';
+                        }
+                        
+                        if (!nodeName && info.nodeIndex !== undefined) {
+                            for (const key in nodeMap) {
+                                if (nodeMap[key].instanceID === info.instanceID) {
+                                    nodeName = nodeMap[key].name || '';
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        instanceName = info.instanceName || '';
+                        
+                        console.log('[AutoElite] Nodo clickeado:', { nodeName, instanceName });
+                        handleMeshClick(nodeName, instanceName);
+                    });
+                });
+                
+                // Desactivar autospin para mejor interacción
+                api.setSpeed(0);
+            });
+        },
+        error: (err) => {
+            statusEl.innerHTML = '⚠️ Error al cargar modelo 3D';
+            statusEl.style.color = '#e74c3c';
+            console.error('[AutoElite] Error en Sketchfab:', err);
+        },
+        autostart: 1,
+        ui_controls: 1,
+        ui_infos: 0,
+        ui_help: 0,
+        ui_stop: 0,
+        ui_annotations: 0,
+        ui_vr: 0,
+        preload: 1,
+    });
+}
+
+// ===== SCROLL REVEAL =====
+const revealElements = document.querySelectorAll('.reveal');
+
+function checkReveal() {
+    revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add('active');
+    });
+}
+
+function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function abrirWhatsApp() {
+    const message = encodeURIComponent('Hola AutoElite, me gustaría recibir información sobre sus vehículos.');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+}
+
+// ===== INICIALIZACIÓN =====
+document.addEventListener('DOMContentLoaded', () => {
+    renderCarousel();
+    checkReveal();
+    setTimeout(initSketchfabAPI, 1000);
+});
+
+window.addEventListener('scroll', checkReveal);
+window.addEventListener('load', checkReveal);
+
+console.log('🚗 AutoElite — Visor 3D interactivo con detección de partes activado');
+</script>
+</body>
+</html>

@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Kordi Motors | Visor 3D - Chevrolet Monza 2023</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --red: #C0392B;
+            --red-hot: #E74C3C;
+            --black: #080808;
+            --dark: #0e0e0e;
+            --card: #141414;
+            --border: rgba(192,57,43,0.22);
+            --white: #F8F6F2;
+            --off: #D6D0C8;
+            --muted: #7a7570;
+            --F: 'Barlow', system-ui, sans-serif;
+            --FC: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--F);
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        /* Header de la página */
+        .page-header {
+            background: linear-gradient(135deg, var(--dark) 0%, #0a0a0a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: var(--FC);
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo span { color: var(--red); }
+        .back-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--off);
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+        }
+        .back-btn:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        /* Contenedor principal */
+        .main-container {
+            display: grid;
+            grid-template-columns: 2fr 1.2fr;
+            min-height: calc(100vh - 70px);
+            align-items: stretch;
+        }
+        
+        /* Columna izquierda: Visor 3D + Galería */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border);
+            background: #0a0a0a;
+            height: 100%;
+        }
+        .viewer-wrapper {
+            background: #000;
+            padding: 15px;
+            flex-shrink: 0;
+        }
+        .viewer-iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 12px;
+            background: #111;
+        }
+        .viewer-hints {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+        .hint-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        .hint-pill i { font-size: 0.8rem; }
+        
+        /* Galería de fotos - IMÁGENES MÁS GRANDES */
+        .gallery-section {
+            padding: 15px 20px 25px 20px;
+            background: var(--dark);
+            border-top: 1px solid var(--border);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .gallery-title {
+            font-family: var(--FC);
+            font-size: 1rem;
+            color: var(--red);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .gallery-title i { font-size: 1.1rem; }
+        .gallery-main {
+            width: 100%;
+            background: #0a0a0a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .gallery-main-image {
+            width: 100%;
+            height: auto;
+            max-height: 420px;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .gallery-main-image:hover { transform: scale(1.01); }
+        .gallery-carousel {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .gallery-nav {
+            width: 38px;
+            height: 38px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--off);
+            transition: 0.2s;
+        }
+        .gallery-nav:hover { border-color: var(--red); color: var(--red); transform: scale(1.05); }
+        .gallery-nav i { font-size: 1rem; }
+        .gallery-thumbs {
+            flex: 1;
+            overflow-x: auto;
+            display: flex;
+            gap: 12px;
+            padding: 5px 0;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+        }
+        .gallery-thumb {
+            width: 100px;
+            height: 70px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #000;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-thumb:active { transform: scale(0.95); }
+        .gallery-thumb.active { border-color: var(--red); }
+        
+        /* Columna derecha: Información */
+        .right-column {
+            background: var(--dark);
+            padding: 20px 25px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .vehicle-title {
+            font-family: var(--FC);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+        .vehicle-title span { color: var(--red); }
+        .vehicle-price {
+            font-family: var(--FC);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--red);
+            margin: 10px 0;
+            flex-shrink: 0;
+        }
+        .vehicle-desc {
+            color: var(--off);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+        .spec-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        .spec-card i { font-size: 1.3rem; color: var(--red); margin-bottom: 5px; display: block; }
+        .spec-card h4 { 
+            font-family: var(--FC); 
+            font-size: 0.7rem; 
+            color: var(--muted); 
+            letter-spacing: 1px; 
+            margin-bottom: 3px; 
+        }
+        .spec-card p { 
+            font-family: var(--FC); 
+            font-size: 0.9rem; 
+            font-weight: 700; 
+            color: var(--white); 
+        }
+        
+        .parts-title {
+            font-family: var(--FC);
+            font-size: 1rem;
+            color: var(--red);
+            margin: 10px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .parts-title i { font-size: 1rem; }
+        .parts-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+            min-height: 200px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .part-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .part-card:active { transform: scale(0.98); background: rgba(192,57,43,0.2); }
+        .part-card.active { border-color: var(--red); background: rgba(192,57,43,0.1); }
+        .part-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .part-icon { font-size: 1.3rem; }
+        .part-name { 
+            font-family: var(--FC); 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            color: var(--white); 
+        }
+        .part-subtitle { 
+            font-size: 0.6rem; 
+            color: var(--muted); 
+        }
+        .part-detail-content {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+            display: none;
+        }
+        .part-card.active .part-detail-content { display: block; }
+        .part-desc { 
+            font-size: 0.7rem; 
+            color: var(--off); 
+            line-height: 1.4; 
+            margin-bottom: 6px; 
+        }
+        .part-specs { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 6px; 
+            margin-bottom: 6px; 
+        }
+        .part-spec { 
+            background: rgba(255,255,255,0.05); 
+            padding: 3px 6px; 
+            border-radius: 4px; 
+            font-size: 0.6rem; 
+        }
+        .part-spec strong { color: var(--red); }
+        .part-tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 5px; 
+        }
+        .tag { 
+            background: rgba(192,57,43,0.15); 
+            color: var(--red); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-size: 0.55rem; 
+            font-weight: 500;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .btn-primary, .btn-secondary {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .btn-primary {
+            background: var(--red);
+            color: #fff;
+        }
+        .btn-primary:active { transform: scale(0.97); background: var(--red-hot); }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--off);
+        }
+        .btn-secondary:active { transform: scale(0.97); border-color: var(--red); color: var(--red); }
+
+        /* CHATBOT FLOTANTE */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            z-index: 1100;
+            font-family: var(--F);
+        }
+        .chat-toggle {
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+            border: none;
+            color: white;
+            font-size: 22px;
+        }
+        .chat-toggle:active { transform: scale(0.95); }
+        .chat-box {
+            position: absolute;
+            bottom: 65px;
+            right: 0;
+            width: 280px;
+            max-width: 85vw;
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+            display: none;
+            flex-direction: column;
+            backdrop-filter: blur(12px);
+            background: rgba(20,20,20,0.98);
+        }
+        .chat-box.open { display: flex; }
+        .chat-header {
+            background: var(--red);
+            padding: 10px 12px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--FC);
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        .chat-header span { font-size: 0.9rem; }
+        .chat-close {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .chat-messages {
+            padding: 10px;
+            height: 220px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .message {
+            max-width: 85%;
+            padding: 8px 10px;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+        .message.bot {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            color: var(--off);
+            align-self: flex-start;
+            border-bottom-left-radius: 3px;
+        }
+        .message.user {
+            background: var(--red);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 3px;
+        }
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid var(--border);
+            padding: 8px;
+            gap: 8px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background: var(--black);
+            border: 1px solid var(--border);
+            padding: 8px 10px;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.75rem;
+            outline: none;
+        }
+        .chat-input-area button {
+            background: var(--red);
+            border: none;
+            color: white;
+            border-radius: 30px;
+            padding: 0 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+        .chat-input-area button:active { transform: scale(0.95); }
+        
+        .floating-tooltip {
+            position: fixed;
+            background: var(--red);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 25px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            pointer-events: none;
+            z-index: 2100;
+            white-space: nowrap;
+            animation: tooltipFade 0.2s ease;
+            transform: translateX(-50%);
+        }
+        @keyframes tooltipFade {
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        
+        /* ============================================ */
+        /* RESPONSIVE - IMÁGENES GRANDES EN MÓVIL */
+        /* ============================================ */
+        
+        /* Desktop grande */
+        @media (min-width: 1400px) {
+            .gallery-main-image {
+                max-height: 520px;
+            }
+            .viewer-iframe {
+                height: 520px;
+            }
+            .gallery-thumb {
+                width: 110px;
+                height: 75px;
+            }
+        }
+        
+        /* Desktop mediano */
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            .gallery-main-image {
+                max-height: 460px;
+            }
+            .viewer-iframe {
+                height: 460px;
+            }
+            .gallery-thumb {
+                width: 100px;
+                height: 70px;
+            }
+        }
+        
+        /* Tablets y laptop pequeña */
+        @media (max-width: 1024px) {
+            .gallery-main-image {
+                max-height: 360px;
+            }
+            .gallery-thumb {
+                width: 85px;
+                height: 60px;
+            }
+            .viewer-iframe {
+                height: 360px;
+            }
+        }
+        
+        /* Tablets pequeñas */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .left-column {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            .right-column {
+                height: auto;
+                max-height: none;
+                overflow-y: visible;
+                padding: 15px;
+            }
+            .viewer-iframe {
+                height: 340px;
+            }
+            .gallery-main-image {
+                max-height: 320px;
+            }
+            .gallery-thumb {
+                width: 80px;
+                height: 55px;
+            }
+            .gallery-section {
+                padding: 12px 15px 20px 15px;
+            }
+            .vehicle-title {
+                font-size: 1.5rem;
+            }
+            .vehicle-price {
+                font-size: 1.7rem;
+            }
+            .page-header {
+                padding: 10px 15px;
+            }
+        }
+        
+        /* Móviles grandes */
+        @media (max-width: 600px) {
+            .viewer-iframe {
+                height: 300px;
+            }
+            .gallery-main-image {
+                max-height: 280px;
+            }
+            .gallery-thumb {
+                width: 70px;
+                height: 50px;
+            }
+            .gallery-nav {
+                width: 32px;
+                height: 32px;
+            }
+            .gallery-nav i {
+                font-size: 0.9rem;
+            }
+            .vehicle-title {
+                font-size: 1.3rem;
+            }
+            .vehicle-price {
+                font-size: 1.5rem;
+            }
+            .vehicle-desc {
+                font-size: 0.8rem;
+            }
+            .specs-grid {
+                gap: 8px;
+            }
+            .spec-card {
+                padding: 8px;
+            }
+            .spec-card i {
+                font-size: 1.1rem;
+            }
+            .spec-card p {
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Móviles medianos */
+        @media (max-width: 480px) {
+            .viewer-iframe {
+                height: 280px;
+            }
+            .gallery-main-image {
+                max-height: 250px;
+            }
+            .gallery-thumb {
+                width: 65px;
+                height: 48px;
+            }
+            .gallery-section {
+                padding: 10px 12px 15px 12px;
+            }
+            .gallery-title {
+                font-size: 0.85rem;
+                margin-bottom: 10px;
+            }
+            .right-column {
+                padding: 12px;
+            }
+            .vehicle-title {
+                font-size: 1.2rem;
+            }
+            .vehicle-price {
+                font-size: 1.3rem;
+                margin: 5px 0;
+            }
+            .vehicle-desc {
+                font-size: 0.75rem;
+            }
+            .specs-grid {
+                gap: 6px;
+            }
+            .spec-card {
+                padding: 6px;
+            }
+            .spec-card i {
+                font-size: 1rem;
+            }
+            .spec-card h4 {
+                font-size: 0.6rem;
+            }
+            .spec-card p {
+                font-size: 0.75rem;
+            }
+            .parts-title {
+                font-size: 0.9rem;
+                margin: 8px 0;
+            }
+            .part-name {
+                font-size: 0.8rem;
+            }
+            .part-desc {
+                font-size: 0.65rem;
+            }
+            .action-buttons {
+                gap: 8px;
+                margin-top: 12px;
+                padding-top: 10px;
+            }
+            .btn-primary, .btn-secondary {
+                padding: 6px;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Móviles pequeños */
+        @media (max-width: 380px) {
+            .viewer-iframe {
+                height: 240px;
+            }
+            .gallery-main-image {
+                max-height: 220px;
+            }
+            .gallery-thumb {
+                width: 55px;
+                height: 42px;
+            }
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            .vehicle-title {
+                font-size: 1.1rem;
+            }
+            .vehicle-price {
+                font-size: 1.2rem;
+            }
+            .gallery-nav {
+                width: 28px;
+                height: 28px;
+            }
+            .gallery-nav i {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-header">
+    <a href="demoactualizado.html" class="back-btn"><i class="fas fa-arrow-left"></i> Volver</a>
+    <div class="logo">KORDI<span>MOTORS</span></div>
+    <a href="#" class="whatsapp-btn" id="whatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+</div>
+
+<div class="main-container">
+    <!-- Columna izquierda: Visor 3D + Galería -->
+    <div class="left-column">
+        <div class="viewer-wrapper">
+            <iframe class="viewer-iframe" id="sketchfabIframe" title="Chevrolet Monza 2023" frameborder="0" allowfullscreen src="https://sketchfab.com/models/dfda867b4f3b4696819b3e55d04d6db4/embed?autostart=1&ui_controls=1&ui_infos=0&ui_help=0&ui_stop=0&ui_annotations=0&ui_vr=0&preload=1&autospin=0"></iframe>
+            <div class="viewer-hints">
+                <div class="hint-pill"><i class="fas fa-mouse-pointer"></i> Arrastrar</div>
+                <div class="hint-pill"><i class="fas fa-search-plus"></i> Pellizcar Zoom</div>
+                <div class="hint-pill"><i class="fas fa-hand-pointer"></i> Clic → Info</div>
+            </div>
+        </div>
+        
+        <!-- Galería de fotos - IMÁGENES MÁS GRANDES -->
+        <div class="gallery-section">
+            <div class="gallery-title"><i class="fas fa-camera"></i> GALERÍA DE FOTOS DEL VEHÍCULO</div>
+            <div class="gallery-main">
+                <img class="gallery-main-image" id="galleryMainImg" src="" alt="Vista del vehículo">
+            </div>
+            <div class="gallery-carousel">
+                <div class="gallery-nav" id="galleryPrevBtn"><i class="fas fa-chevron-left"></i></div>
+                <div class="gallery-thumbs" id="galleryThumbs"></div>
+                <div class="gallery-nav" id="galleryNextBtn"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Columna derecha: Información -->
+    <div class="right-column">
+        <div class="vehicle-title">CHEVROLET <span>MONZA 2023</span></div>
+        <div class="vehicle-price">$22,990 USD</div>
+        <div class="vehicle-desc">
+            El sedán premium que combina lujo, tecnología y eficiencia. Equipado con motor turbo de 163 HP, acabados de primera calidad y un diseño aerodinámico que redefine la experiencia de conducción.
+        </div>
+        
+        <div class="specs-grid">
+            <div class="spec-card"><i class="fas fa-engine"></i><h4>MOTOR</h4><p>1.3L Turbo</p></div>
+            <div class="spec-card"><i class="fas fa-horse-head"></i><h4>POTENCIA</h4><p>163 HP</p></div>
+            <div class="spec-card"><i class="fas fa-tachometer-alt"></i><h4>ACELERACIÓN</h4><p>8.4 seg</p></div>
+            <div class="spec-card"><i class="fas fa-gas-pump"></i><h4>CONSUMO</h4><p>15 km/L</p></div>
+            <div class="spec-card"><i class="fas fa-weight-hanging"></i><h4>PESO</h4><p>1,285 kg</p></div>
+            <div class="spec-card"><i class="fas fa-cube"></i><h4>MALETERO</h4><p>469 L</p></div>
+        </div>
+        
+        <div class="parts-title"><i class="fas fa-microchip"></i> EXPLORA CADA PARTE DEL VEHÍCULO</div>
+        <div class="parts-grid" id="partsGrid"></div>
+        
+        <div class="action-buttons">
+            <a href="#" class="btn-primary" id="whatsappBtn2"><i class="fab fa-whatsapp"></i> Cotizar ahora</a>
+            <a href="demoactualizado.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> Ver más modelos</a>
+        </div>
+    </div>
+</div>
+
+<div class="chatbot-widget">
+    <div class="chat-toggle" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></div>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header"><span><i class="fas fa-headset"></i> Kordi Bot</span><button class="chat-close" onclick="toggleChat()">✕</button></div>
+        <div class="chat-messages" id="chatMessages"><div class="message bot">¡Hola! Soy el asistente virtual de Kordi Motors. ¿En qué puedo ayudarte? 🚗</div></div>
+        <div class="chat-input-area"><input type="text" id="chatInput" placeholder="Escribe tu mensaje..." onkeypress="if(event.key==='Enter') sendChatMessage();"><button onclick="sendChatMessage()">Enviar</button></div>
+    </div>
+</div>
+
+<script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+<script>
+const WHATSAPP_NUMBER = "528136718206";
+const VEHICLE_MODEL = "Chevrolet Monza 2023";
+const VEHICLE_PRICE = "$22,990 USD";
+
+const partsListData = [
+    { id:"llantas", icon:"🔵", title:"LLANTAS & RINES", subtitle:"Sistema de Rodado Premium", desc:"Rines de aleación de aluminio de 16\" con diseño de 5 radios. Llantas de perfil bajo 205/55 R16. Sistema de monitoreo de presión TPMS incluido.", specs:[{label:"Medida",val:"205/55 R16"},{label:"Material",val:"Aluminio forjado"}], tags:["Bajo perfil","Rin 16\"","TPMS"] },
+    { id:"motor", icon:"⚙️", title:"MOTOR TURBO", subtitle:"1.3L SIDI", desc:"Motor 1.3L Turbo SIDI de 163 HP y 220 Nm de torque. Inyección directa y turbo de baja inercia.", specs:[{label:"Potencia",val:"163 HP"},{label:"Torque",val:"220 Nm"}], tags:["Turbo","Eficiente"] },
+    { id:"interior", icon:"🎨", title:"INTERIOR PREMIUM", subtitle:"Cabina de Lujo", desc:"Asientos de piel premium con ajuste eléctrico y calefacción. Pantalla flotante de 10\" HD.", specs:[{label:"Pantalla",val:"10\" táctil"},{label:"Sonido",val:"Bose 8 altavoces"}], tags:["Apple CarPlay","Calefacción"] },
+    { id:"frenado", icon:"🛑", title:"SISTEMA DE FRENOS", subtitle:"ABS+EBD", desc:"Discos ventilados delanteros de 280mm. ABS con EBD y asistente de frenado.", specs:[{label:"Delanteros",val:"Disco ventilado"},{label:"Distancia",val:"38.5 m"}], tags:["ABS","EBD","Seguridad"] },
+    { id:"suspension", icon:"🔧", title:"SUSPENSIÓN", subtitle:"Independiente", desc:"McPherson delantera con barra estabilizadora. Eje de torsión trasero optimizado.", specs:[{label:"Delantera",val:"McPherson"},{label:"Dirección",val:"EPS eléctrica"}], tags:["Confort","Estabilidad"] },
+    { id:"faros", icon:"💡", title:"ILUMINACIÓN LED", subtitle:"Matrix", desc:"Faros LED Matrix con iluminación superior. Luces diurnas DRL integradas.", specs:[{label:"Tecnología",val:"LED Matrix"},{label:"Alcance",val:"120 m"}], tags:["LED","Auto on/off"] },
+    { id:"aerodinamica", icon:"💨", title:"AERODINÁMICA", subtitle:"Cx 0.28", desc:"Carrocería optimizada con Cx 0.28. Spoiler integrado para mayor estabilidad.", specs:[{label:"Coeficiente",val:"0.28"}], tags:["Eficiencia","Estabilidad"] },
+    { id:"conectividad", icon:"📱", title:"CONECTIVIDAD", subtitle:"MyLink+", desc:"Sistema MyLink+ con pantalla de 10\" HD. Apple CarPlay y Android Auto inalámbricos.", specs:[{label:"Pantalla",val:"10\" HD"},{label:"Carga",val:"Inducción Qi"}], tags:["Wireless","Android Auto"] }
+];
+
+const galleryImages = [
+    "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=1600&h=1000&fit=crop",
+    "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1600&h=1000&fit=crop",
+    "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1600&h=1000&fit=crop",
+    "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1600&h=1000&fit=crop",
+    "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=1600&h=1000&fit=crop"
+];
+
+let currentGalleryIndex = 0;
+let apiSketchfab = null;
+
+function renderPartsGrid() {
+    const container = document.getElementById('partsGrid');
+    if(!container) return;
+    container.innerHTML = partsListData.map(part => `
+        <div class="part-card" data-part="${part.id}">
+            <div class="part-card-header">
+                <div class="part-icon">${part.icon}</div>
+                <div>
+                    <div class="part-name">${part.title}</div>
+                    <div class="part-subtitle">${part.subtitle}</div>
+                </div>
+            </div>
+            <div class="part-detail-content">
+                <div class="part-desc">${part.desc}</div>
+                <div class="part-specs">${part.specs.map(s => `<span class="part-spec"><strong>${s.label}:</strong> ${s.val}</span>`).join('')}</div>
+                <div class="part-tags">${part.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            </div>
+        </div>
+    `).join('');
+    
+    document.querySelectorAll('.part-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelectorAll('.part-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+        });
+    });
+    if(document.querySelector('.part-card')) document.querySelector('.part-card').classList.add('active');
+}
+
+function renderGallery() {
+    const thumbsContainer = document.getElementById('galleryThumbs');
+    const mainImg = document.getElementById('galleryMainImg');
+    if(!thumbsContainer || !mainImg) return;
+    
+    thumbsContainer.innerHTML = galleryImages.map((img, idx) => `
+        <div class="gallery-thumb ${idx === currentGalleryIndex ? 'active' : ''}" data-index="${idx}">
+            <img src="${img}" alt="Vista vehículo ${idx+1}">
+        </div>
+    `).join('');
+    
+    mainImg.src = galleryImages[currentGalleryIndex];
+    
+    document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+        thumb.addEventListener('click', () => {
+            currentGalleryIndex = parseInt(thumb.dataset.index);
+            mainImg.src = galleryImages[currentGalleryIndex];
+            document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        });
+    });
+}
+
+function setupGalleryNavigation() {
+    const prevBtn = document.getElementById('galleryPrevBtn');
+    const nextBtn = document.getElementById('galleryNextBtn');
+    const mainImg = document.getElementById('galleryMainImg');
+    if(!prevBtn || !nextBtn || !mainImg) return;
+    
+    prevBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+        mainImg.src = galleryImages[currentGalleryIndex];
+        document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+            if(i === currentGalleryIndex) t.classList.add('active');
+            else t.classList.remove('active');
+        });
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+        mainImg.src = galleryImages[currentGalleryIndex];
+        document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+            if(i === currentGalleryIndex) t.classList.add('active');
+            else t.classList.remove('active');
+        });
+    });
+}
+
+function showFloatingTooltip(message, x, y) {
+    const existing = document.querySelector('.floating-tooltip');
+    if(existing) existing.remove();
+    const tooltip = document.createElement('div');
+    tooltip.className = 'floating-tooltip';
+    tooltip.textContent = message;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = (y - 30) + 'px';
+    document.body.appendChild(tooltip);
+    setTimeout(() => tooltip.remove(), 2000);
+}
+
+function detectPartFromMeshName(meshName) {
+    const name = (meshName || '').toLowerCase();
+    if(name.includes('wheel')||name.includes('tire')||name.includes('rim')) return 'llantas';
+    if(name.includes('engine')||name.includes('motor')||name.includes('hood')) return 'motor';
+    if(name.includes('seat')||name.includes('interior')||name.includes('dashboard')) return 'interior';
+    if(name.includes('brake')||name.includes('freno')) return 'frenado';
+    if(name.includes('suspension')||name.includes('shock')) return 'suspension';
+    if(name.includes('light')||name.includes('headlight')||name.includes('faro')) return 'faros';
+    if(name.includes('body')||name.includes('bumper')||name.includes('spoiler')) return 'aerodinamica';
+    if(name.includes('screen')||name.includes('radio')||name.includes('display')) return 'conectividad';
+    return null;
+}
+
+function handleMeshClick(meshName, instanceName, mouseX, mouseY) {
+    const partId = detectPartFromMeshName(meshName);
+    if(partId) {
+        const partElement = document.querySelector(`.part-card[data-part="${partId}"]`);
+        if(partElement) {
+            partElement.click();
+            const partTitle = partElement.querySelector('.part-name')?.textContent || 'Componente';
+            showFloatingTooltip(`🔍 ${partTitle}`, mouseX, mouseY);
+            partElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+}
+
+function initSketchfabAPI() {
+    const iframe = document.getElementById('sketchfabIframe');
+    if(!iframe || typeof Sketchfab === 'undefined') return;
+    const client = new Sketchfab(iframe);
+    client.init('dfda867b4f3b4696819b3e55d04d6db4', { 
+        success: (api) => { 
+            api.start();
+            api.addEventListener('viewerready', () => {
+                api.addEventListener('click', (info) => {
+                    if(!info || (!info.instanceID && !info.nodeIndex)) return;
+                    const mouseX = info.clientX || window.innerWidth/2;
+                    const mouseY = info.clientY || window.innerHeight/2;
+                    api.getNodeMap((err, nodeMap) => {
+                        if(err) return;
+                        let nodeName = '';
+                        if(info.instanceID !== undefined && nodeMap[info.instanceID]) nodeName = nodeMap[info.instanceID].name || '';
+                        handleMeshClick(nodeName, info.instanceName || '', mouseX, mouseY);
+                    });
+                });
+                api.setSpeed(0);
+            });
+        }, 
+        error: (err) => console.error('Error Sketchfab:', err), 
+        autostart: 1 
+    });
+}
+
+function abrirWhatsApp() {
+    const message = `Hola Kordi Motors, estoy interesado en el vehículo ${VEHICLE_MODEL} con precio de ${VEHICLE_PRICE}.`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+function toggleChat() { document.getElementById('chatBox').classList.toggle('open'); }
+function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if(!msg) return;
+    const container = document.getElementById('chatMessages');
+    container.innerHTML += `<div class="message user">${msg}</div>`;
+    input.value = '';
+    setTimeout(() => { 
+        container.innerHTML += `<div class="message bot">Gracias por contactar Kordi Motors 😊, un asesor te responderá pronto.</div>`; 
+        container.scrollTop = container.scrollHeight; 
+    }, 400);
+    container.scrollTop = container.scrollHeight;
+}
+
+document.getElementById('whatsappBtn')?.addEventListener('click', (e) => { e.preventDefault(); abrirWhatsApp(); });
+document.getElementById('whatsappBtn2')?.addEventListener('click', (e) => { e.preventDefault(); abrirWhatsApp(); });
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderPartsGrid();
+    renderGallery();
+    setupGalleryNavigation();
+    setTimeout(() => { if(typeof Sketchfab !== 'undefined') initSketchfabAPI(); }, 500);
+});
+
+window.toggleChat = toggleChat;
+window.sendChatMessage = sendChatMessage;
+</script>
+</body>
+</html>
