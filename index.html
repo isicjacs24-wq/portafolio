@@ -8,6 +8,9 @@
 <!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<!-- Font Awesome (para iconos) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 body{
     background:#0f172a;
@@ -65,6 +68,21 @@ body{
     transform:scale(1.05);
 }
 
+/* BOTON NARANJA PARA TAQUERIA */
+.btn-taqueria{
+    background:#f97316;
+    color:white;
+    border:none;
+    padding:12px 28px;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.btn-taqueria:hover{
+    box-shadow:0 0 20px #f97316;
+    transform:scale(1.05);
+}
+
 /* CARDS - MISMO ESTILO PARA TODAS */
 .card{
     background:#1e293b;
@@ -107,6 +125,15 @@ footer{
     margin-left:10px;
 }
 
+.badge-taqueria{
+    background:#f97316;
+    color:white;
+    font-size:0.8rem;
+    padding:5px 10px;
+    border-radius:20px;
+    margin-left:10px;
+}
+
 </style>
 </head>
 
@@ -127,6 +154,7 @@ footer{
 <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
 <li class="nav-item"><a class="nav-link" href="#proyectos">Proyectos</a></li>
 <li class="nav-item"><a class="nav-link" href="#paginas-basicas">Páginas Básicas</a></li>
+<li class="nav-item"><a class="nav-link" href="#taquerias">Taquerías</a></li>
 <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
 </ul>
 </div>
@@ -313,13 +341,66 @@ chatbot e implementación de cambio dinámico de colores en interfaz.
 </div>
 </section>
 
-<!-- SECCIÓN: PÁGINAS WEB BÁSICAS -->
+<!-- ============================================ -->
+<!-- SECCIÓN: TAQUERÍAS                           -->
+<!-- ============================================ -->
+<section id="taquerias">
+<div class="container">
+
+<div class="text-center mb-5 fade-up">
+<h2 class="fw-bold">🌮 Sistema para Taquerías 🌮</h2>
+<p class="lead">Menú digital, pedidos por WhatsApp y tickets automáticos</p>
+</div>
+
+<div class="row g-4 justify-content-center">
+
+<!-- Sistema para Taquería -->
+<div class="col-md-8 col-lg-6 fade-up">
+<div class="card p-4 h-100" style="border-top: 4px solid #f97316;">
+<div class="d-flex align-items-center mb-3">
+<span class="fs-2 me-2">🌮🔥</span>
+<h5 class="mb-0">El Fogón del Sabor</h5>
+<span class="badge-taqueria">Menú Digital</span>
+</div>
+<p class="mb-3">
+Menú digital completo con categorías: Tacos, Tapas, Piratas, Hamburguesas, Papas, Tortas, Bebidas.
+</p>
+<ul class="small mb-3">
+<li>✅ Selector de servicio (Domicilio / Local con número de mesa)</li>
+<li>✅ Selección de tipo de tortilla (Harina/Maíz)</li>
+<li>✅ Carrito de compras flotante</li>
+<li>✅ Pedidos directos por WhatsApp</li>
+<li>✅ Impresión de tickets térmicos</li>
+<li>✅ Campo para notas especiales</li>
+</ul>
+<div class="mt-auto">
+<a href="Menu/index.html" class="btn btn-taqueria w-100">
+<i class="fas fa-utensils me-2"></i>Ver Menú Digital
+</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="text-center mt-4 fade-up">
+<a href="#contacto" class="btn btn-outline-light rounded-pill px-4">
+<i class="fas fa-envelope me-2"></i>¿Quieres un sistema así para tu negocio?
+</a>
+</div>
+
+</div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECCIÓN: PÁGINAS WEB BÁSICAS                 -->
+<!-- ============================================ -->
 <section id="paginas-basicas">
 <div class="container">
 
 <div class="text-center mb-5 fade-up">
 <h2 class="fw-bold">🌐 Páginas Web Básicas</h2>
-<p class="lead">Una colección de sitios web simples pero profesionales para futuros proyectos</p>
+<p class="lead">Una colección de sitios web simples pero profesionales</p>
 </div>
 
 <div class="row g-4">
@@ -362,133 +443,70 @@ Ver Proyecto
 </div>
 </div>
 
-<!-- Tquería Demo -->
-<div class="col-md-6 col-lg-4 fade-up">
-<div class="card p-4 h-100">
-
-<div class="d-flex align-items-center mb-3">
-
-<span class="fs-2 me-2">🌮</span>
-
-<h5 class="mb-0">Sistema para Taquerías</h5>
-
-<span class="badge-new">Nuevo</span>
-
-</div>
-
-<p class="mb-3">
-Página web con menú digital, pedidos por WhatsApp, ubicación del cliente y generación de ticket automático.
-</p>
-
-<div class="mt-auto">
-
-<a href="taqueria-demo.html" class="btn btn-custom w-100">
-Ver Proyecto
-</a>
-
-</div>
-
-</div>
-</div>
-
 <!-- Liga Deportiva Demo -->
 <div class="col-md-6 col-lg-4 fade-up">
 <div class="card p-4 h-100">
-
 <div class="d-flex align-items-center mb-3">
-
 <span class="fs-2 me-2">⚽</span>
-
 <h5 class="mb-0">Sistema para Ligas Deportivas</h5>
-
 <span class="badge-new">Demo</span>
-
 </div>
-
 <p class="mb-3">
-Plataforma web para gestionar ligas deportivas con tabla de posiciones, jornadas, equipos, jugadores y estadísticas en tiempo real.
+Plataforma web para gestionar ligas deportivas con tabla de posiciones, jornadas, equipos y estadísticas.
 </p>
-
 <div class="mt-auto">
-
 <a href="liga-linares.html" class="btn btn-custom w-100">
 Ver Proyecto
 </a>
-
 </div>
-
 </div>
 </div>
 
 <!-- Pollería y Carnes Demo -->
 <div class="col-md-6 col-lg-4 fade-up">
 <div class="card p-4 h-100">
-
 <div class="d-flex align-items-center mb-3">
-
 <span class="fs-2 me-2">🐔🥩</span>
-
 <h5 class="mb-0">Sistema para Pollerías y Carnicerías</h5>
-
 <span class="badge-new">Nuevo</span>
-
 </div>
-
 <p class="mb-3">
-Página web con catálogo de productos, pedidos por WhatsApp, ubicación del cliente y generación de ticket automático.
+Página web con catálogo de productos, pedidos por WhatsApp y ticket automático.
 </p>
-
 <div class="mt-auto">
-
 <a href="pollosycarnes.html" class="btn btn-custom w-100">
 Ver Proyecto
 </a>
-
 </div>
-
 </div>
 </div>
 
 <!-- Agencia de Autos Cloud -->
 <div class="col-md-6 col-lg-4 fade-up">
 <div class="card p-4 h-100">
-
 <div class="d-flex align-items-center mb-3">
-
 <span class="fs-2 me-2">🚗</span>
-
 <h5 class="mb-0">Agencia Cloud Cars</h5>
-
 <span class="badge-new">Premium</span>
-
 </div>
-
 <p class="mb-3">
-Plataforma web para agencias de autos con catálogo interactivo,
-carrusel premium, múltiples marcas, filtros por categoría,
-ubicación de agencias mediante mapas y contacto rápido.
+Plataforma web para agencias de autos con catálogo interactivo, carrusel premium y mapas.
 </p>
-
-<ul class="list-unstyled small mb-4">
+<ul class="list-unstyled small mb-3">
 <li>✅ Catálogo de vehículos</li>
 <li>✅ Marcas y categorías</li>
 <li>✅ Integración con mapas</li>
 <li>✅ Diseño responsive premium</li>
-<li>✅ Carrusel interactivo</li>
 </ul>
-
 <div class="mt-auto">
-
 <a href="demoactualizado.html" class="btn btn-custom w-100">
 Ver Proyecto
 </a>
-
-</div>
-
 </div>
 </div>
+</div>
 
-<!-- Template para futuras páginas básicas -->
+<!-- Próximamente -->
 <div class="col-md-6 col-lg-4 fade-up">
 <div class="card p-4 h-100">
 <div class="d-flex align-items-center mb-3">
@@ -496,7 +514,7 @@ Ver Proyecto
 <h5 class="mb-0">Próximamente</h5>
 </div>
 <p class="mb-3">
-Más páginas web básicas estarán disponibles pronto. ¡Mantente atento!
+Más páginas web estarán disponibles pronto. ¡Mantente atento!
 </p>
 <div class="mt-auto">
 <button class="btn btn-custom w-100" disabled style="opacity:0.5;">
@@ -506,37 +524,6 @@ Próximamente
 </div>
 </div>
 
-
-<!-- Template para futuras páginas básicas -->
-<div class="col-md-6 col-lg-4 fade-up">
-<div class="card p-4 h-100">
-<div class="d-flex align-items-center mb-3">
-<span class="fs-2 me-2">📱</span>
-<h5 class="mb-0">En desarrollo</h5>
-</div>
-<p class="mb-3">
-Estamos trabajando en nuevos proyectos para mostrarte.
-</p>
-<div class="mt-auto">
-<button class="btn btn-custom w-100" disabled style="opacity:0.5;">
-Próximamente
-</button>
-</div>
-</div>
-</div>
-
-</div>
-
-<!-- Mensaje adicional -->
-<div class="text-center mt-5 fade-up">
-<p class="text-white-50">
-✨ Todos los proyectos están disponibles en mi repositorio de GitHub
-</p>
-<div class="d-flex justify-content-center gap-3">
-<a href="#" class="text-decoration-none text-white">
-<i class="bi bi-github"></i> Ver repositorio
-</a>
-</div>
 </div>
 
 </div>
@@ -557,10 +544,10 @@ WhatsApp
 © 2026 - Jacs Systems | Desarrollo Web
 </footer>
 
-<!-- Bootstrap JS y dependencias -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Asegurar que los enlaces del navbar funcionen con el smooth scroll -->
+<!-- Smooth scroll -->
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
